@@ -1114,14 +1114,14 @@
             <!-- 正面：抖音截图 -->
             <div class="ip-flip-front">
               <div class="ip-flip-img" style="background:none;position:relative;">
-                <img src="uploads/images/douyin.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:20px;">
+                <img src="uploads/images/douyin.jpg" alt="" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:20px;">
               </div>
               <div class="ip-flip-hint">👆 点击翻转</div>
             </div>
             <!-- 背面：小红书截图 -->
             <div class="ip-flip-back">
               <div class="ip-flip-img" style="background:none;position:relative;">
-                <img src="uploads/images/xiaohongshu.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:20px;">
+                <img src="uploads/images/xiaohongshu.jpg" alt="" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:20px;">
               </div>
               <div class="ip-flip-hint">👆 点击翻转</div>
             </div>
@@ -1266,11 +1266,11 @@
     card.className = 'work-card ' + (isVideo ? 'card-video' : 'card-image');
 
     if (hasImage) {
-      card.innerHTML = '<img src="' + w.filename + '" alt="" style="width:100%;height:auto;display:block;border-radius:12px;">';
+      card.innerHTML = '<img src="' + w.filename + '" alt="" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:12px;">';
     } else if (isVideo) {
       // 封面图或渐变色背景
       var thumbInner = w.cover
-        ? '<img src="' + w.cover + '" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">'
+        ? '<img src="' + w.cover + '" alt="" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">'
         : '<div class="thumb-gradient" style="background:' + (w.gradient || 'linear-gradient(135deg, #1a1d28 0%, #252830 100%)') + '"></div>';
       var playBtn = '<div class="play-btn">▶</div>';
       // 有外链则整个卡片可点击跳转
@@ -1300,14 +1300,16 @@
     if (photoStack) photoStack.innerHTML = '';
     videos.forEach(w => videoStrip.appendChild(renderCard(w)));
     if (photoStack) {
-      photos.forEach((w) => {
+      photos.forEach((w, i) => {
         const hasImage = w.filename && w.type === 'image';
         const card = document.createElement('div');
         card.className = 'stack-card';
         card.onclick = function() { flipStack(photoStack); };
         card.innerHTML =
           (hasImage
-            ? '<img src="' + w.filename + '" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:16px;z-index:0;">'
+            ? (i < 3
+                ? '<img src="' + w.filename + '" alt="" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:16px;z-index:0;">'
+                : '<img data-src="' + w.filename + '" alt="" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:16px;z-index:0;">')
             : '<div class="stack-bg" style="background:' + w.gradient + '"></div>');
         photoStack.appendChild(card);
       });
@@ -1335,6 +1337,17 @@
     }
   }
 
+  // 堆叠卡片按需加载：保证顶部 3 张已就绪（其余翻牌时才陆续加载）
+  function ensureStackPreload(stack) {
+    [...stack.children].slice(0, 3).forEach(card => {
+      const img = card.querySelector('img[data-src]');
+      if (img) {
+        img.src = img.getAttribute('data-src');
+        img.removeAttribute('data-src');
+      }
+    });
+  }
+
   function flipStack(stack) {
     const cards = [...stack.children];
     const first = cards[0];
@@ -1351,7 +1364,8 @@
         else if (i === 2) { card.style.transform = 'translateY(28px) scale(0.9) rotate(2.5deg)'; card.style.opacity = '0.6'; }
         else { card.style.transform = 'translateY(44px) scale(0.85) rotate(-1.5deg)'; card.style.opacity = '0.4'; }
       });
-      // 翻牌后根据新顶部图片自适应容器高度
+      // 翻牌后按需加载即将露出的下一张，并自适应容器高度
+      ensureStackPreload(stack);
       updateStackSize(stack);
     }, 300);
   }

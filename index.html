@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Caveat:wght@400;700&family=Fira+Code:wght@400;500&family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/florida-vibes" rel="stylesheet">
   <style>
     /* === CSS变量（品牌色） === */
     :root { --_esther-ds: "esthersjw-v1";
@@ -134,6 +135,7 @@
 
     /* 终端样式 */
     .term-line { margin-bottom: 2px; }
+    .term-blank { height: 12px; } /* 段落空行：矮空行，避免内容超高出滚动条 */
     .term-prompt { color: var(--blue); }
     .term-cmd { color: #fff; }
     .term-output {
@@ -441,39 +443,104 @@
 
     /* 三句宣言 */
     .editorial-statements {
-      display: flex; flex-direction: column; gap: clamp(28px, 4vw, 40px);
-      max-width: 640px; margin: 0 auto clamp(36px, 5vw, 48px);
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 40px;
+      max-width: 1140px;
+      margin: 0 auto clamp(40px, 5vw, 60px);
     }
     .editorial-stmt {
-      text-align: left; display: flex; align-items: flex-start; gap: 14px;
+      flex: 0 1 320px; min-width: 0;
+      text-align: left;
     }
-    .editorial-stmt-icon {
-      flex-shrink: 0; width: 28px; height: 28px; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem; font-weight: 700;
-      margin-top: 2px;
+    .editorial-stmt.s1 { margin-top: 104px; }
+    .editorial-stmt.s2 { margin-top: 48px; }
+    .editorial-stmt.s3 { margin-top: 8px; }
+    .editorial-stmt-step {
+      display: block;
+      width: 16px;
+      height: 20px;
+      margin-bottom: 14px;
     }
-    .editorial-stmt:nth-child(1) .editorial-stmt-icon { background: rgba(34,238,221,0.1); color: var(--blue); }
-    .editorial-stmt:nth-child(2) .editorial-stmt-icon { background: rgba(167,139,250,0.1); color: var(--yellow); }
-    .editorial-stmt:nth-child(3) .editorial-stmt-icon { background: rgba(167,139,250,0.1); color: var(--yellow); }
-    .editorial-stmt:nth-child(4) .editorial-stmt-icon { background: rgba(34,238,221,0.08); color: var(--blue); }
-    .editorial-stmt-body { flex: 1; }
+    .editorial-stmt.s1 .editorial-stmt-step,
+    .editorial-stmt.s3 .editorial-stmt-step { color: var(--blue); }
+    .editorial-stmt.s2 .editorial-stmt-step { color: var(--yellow); }
+    .stmt-connector {
+      align-self: center;
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+      opacity: 0.5;
+    }
+    .editorial-stmt-num {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .editorial-num-val {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(1.6rem, 2.2vw, 1.9rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .editorial-num-unit {
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      letter-spacing: 0.05em;
+    }
+    .editorial-stmt.s1 .editorial-num-val { color: var(--blue); }
+    .editorial-stmt.s2 .editorial-num-val { color: var(--yellow); }
+    .editorial-stmt.s3 .editorial-num-val { color: var(--blue); }
+    .editorial-stmt-year {
+      display: block;
+      font-family: 'Noto Serif SC', serif;
+      font-style: italic;
+      font-size: 1rem; font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+    .editorial-stmt.s1 .editorial-stmt-year { color: var(--blue); }
+    .editorial-stmt.s2 .editorial-stmt-year { color: var(--yellow); }
+    .editorial-stmt.s3 .editorial-stmt-year { color: var(--blue); }
     .editorial-stmt-text {
       font-family: 'Noto Serif SC', serif; font-weight: 700;
-      font-size: clamp(1rem, 1.6vw, 1.15rem);
-      color: var(--ink); line-height: 1.7;
-      margin-bottom: 8px;
+      font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+      color: var(--ink); line-height: 1.4;
+      margin-bottom: 10px;
     }
-    .editorial-stmt-tag {
-      display: inline-block; font-family: 'Fira Code', monospace;
-      font-size: 0.82rem; font-weight: 500;
-      padding: 4px 14px; border-radius: 12px;
-      letter-spacing: 0.1em;
+    .editorial-stmt-desc {
+      font-size: 0.9rem; color: var(--ink); opacity: 0.68; line-height: 1.7;
+      margin-top: 0;
     }
-    .editorial-stmt:nth-child(1) .editorial-stmt-tag { background: rgba(34,238,221,0.08); color: var(--blue); }
-    .editorial-stmt:nth-child(2) .editorial-stmt-tag { background: rgba(167,139,250,0.08); color: var(--yellow); }
-    .editorial-stmt:nth-child(3) .editorial-stmt-tag { background: rgba(167,139,250,0.08); color: var(--yellow); }
-    .editorial-stmt:nth-child(4) .editorial-stmt-tag { background: rgba(34,238,221,0.06); color: var(--blue); }
+    .editorial-stmt-chain {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .editorial-stmt-chain .chain-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      column-gap: 6px;
+      row-gap: 6px;
+    }
+    .editorial-stmt-chain .chain-word { color: var(--ink-light); }
+    .editorial-stmt-chain .chain-arrow { color: var(--blue); opacity: 0.75; }
+    .editorial-stmt.s2 .editorial-stmt-chain .chain-arrow { color: var(--yellow); }
+    .editorial-stmt.reveal { transition-duration: 1.2s; }
+    .editorial-stmt.s1.reveal { transition-delay: 0.1s; }
+    .editorial-stmt.s2.reveal { transition-delay: 0.35s; }
+    .editorial-stmt.s3.reveal { transition-delay: 0.6s; }
 
     /* 愿景条目复用 .editorial-stmt 样式 */
 
@@ -597,6 +664,313 @@
     .dash-card h3 { font-family: 'Noto Serif SC', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
     .chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
     .chip { font-size: 0.75rem; padding: 4px 10px; border-radius: 12px; background: rgba(106,154,80,0.05); color: var(--ink-light); }
+
+    /* ============================================================
+       文策展示 — 文件夹看板
+       ============================================================ */
+    .folder-board {
+      position: relative;
+      height: clamp(560px, 78vh, 760px);
+      overflow: hidden;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1.6px);
+      background-size: 26px 26px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    @font-face {
+      font-family: '喜脉喜欢体';
+      src: url('喜脉喜欢体-subset.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    .board-hint {
+      position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+      font-family: '喜脉喜欢体', 'Florida Vibes', 'Caveat', cursive;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem); color: var(--ink-light); opacity: 0.45; pointer-events: none;
+      letter-spacing: 0.04em; white-space: nowrap;
+    }
+    .proj-folder {
+      position: absolute; display: flex; flex-direction: column; align-items: center;
+      cursor: grab; user-select: none;
+      transform: translateX(-50%);
+    }
+    .proj-folder.dragging { cursor: grabbing; }
+    .folder-node {
+      position: relative;
+      display: inline-flex; flex-direction: column; align-items: center; gap: 10px;
+      cursor: pointer; padding: 14px 18px; border-radius: 14px;
+      transition: background .2s;
+    }
+    .folder-node:hover { background: rgba(255,255,255,0.05); }
+    .folder-svg { filter: drop-shadow(0 8px 18px rgba(0,0,0,0.45)); transition: transform .28s ease; pointer-events: none; }
+    .proj-folder > .folder-node > .folder-svg { width: 88px; height: 77px; }
+    .folder-node:hover .folder-svg { transform: translateY(-4px); }
+    .folder-name { font-family: 'Noto Serif SC', serif; font-size: 1.05rem; font-weight: 700; color: var(--ink); text-align: center; line-height: 1.4; pointer-events: none; }
+    .folder-dl {
+      position: absolute; top: 2px; right: 2px;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 20px; height: 20px; border-radius: 50%;
+      border: none; cursor: pointer; font-size: 0.68rem; line-height: 1;
+      background: rgba(255,255,255,0.08); color: var(--theme, #22eedd);
+      opacity: 0; transform: scale(0.8);
+      transition: opacity .2s ease, transform .2s ease, background .2s ease, color .2s ease;
+      pointer-events: none;
+    }
+    .folder-node:hover .folder-dl { opacity: 1; transform: scale(1); pointer-events: auto; }
+    .folder-dl:hover { background: var(--theme, #22eedd); color: #111; }
+
+    /* 文件浮层抽屉（突破桌面边界） */
+    .file-drawer {
+      position: fixed; z-index: 300;
+      left: 0; top: 0;
+      width: 320px;
+      max-height: 360px;
+      background: rgba(17,19,24,0.98);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      backdrop-filter: blur(14px);
+      display: flex; flex-direction: column;
+      opacity: 0; transform: translateY(-4px);
+      pointer-events: none;
+      transition: opacity .18s ease, transform .2s ease;
+    }
+    .file-drawer.show { opacity: 1; transform: none; pointer-events: auto; }
+    .file-drawer-head {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .file-drawer-title {
+      font-family: 'Noto Serif SC', serif; font-size: 1rem; font-weight: 700;
+      color: var(--theme, #22eedd); flex: 1;
+    }
+    .file-drawer-dl {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15); background: transparent;
+      color: var(--ink); cursor: pointer; font-size: 0.78rem;
+      transition: background .2s, color .2s;
+    }
+    .file-drawer-dl:hover { background: var(--theme, #22eedd); color: #111; }
+    .file-drawer-close {
+      width: 26px; height: 26px; border-radius: 50%; border: none;
+      background: rgba(255,255,255,0.08); color: var(--ink-light);
+      cursor: pointer; font-size: 0.8rem; transition: background .2s, color .2s;
+    }
+    .file-drawer-close:hover { background: rgba(255,255,255,0.16); color: #fff; }
+    .file-drawer-list {
+      display: flex; flex-direction: column; gap: 4px;
+      padding: 10px 12px; overflow-y: auto;
+      max-height: 230px;
+    }
+    .file-drawer-list .file-node { white-space: normal; max-width: 100%; }
+
+    /* 展开区：居中平铺，无连接线 */
+    .folder-children { max-height: 0; width: 0; opacity: 0; overflow: hidden; transition: max-height .5s ease, opacity .4s ease; }
+    .proj-folder.open > .folder-children,
+    .sub-folder.open > .folder-children { max-height: 1400px; width: auto; opacity: 1; }
+    .children-board {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 8px; padding-top: 10px;
+    }
+
+    /* 子文件夹 */
+    .sub-folder { display: flex; flex-direction: column; align-items: center; }
+    .sub-folder .folder-node { gap: 8px; padding: 10px 12px; }
+    .sub-folder .folder-svg { width: 52px; height: 45px; }
+    .sub-folder .folder-node:hover .folder-svg { transform: translateY(-3px); }
+    .sub-folder .folder-name { font-size: 0.78rem; font-weight: 600; color: var(--ink-light); }
+    .sub-folder .folder-children .children-board { gap: 8px; padding-top: 10px; max-width: 620px; }
+
+    /* 文件 */
+    .file-node {
+      display: inline-flex; align-items: center; gap: 8px;
+      cursor: pointer; padding: 8px 14px; border-radius: 10px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      transition: background .2s, border-color .2s, transform .2s; white-space: nowrap;
+    }
+    .file-node:hover { background: rgba(34,238,221,0.08); border-color: rgba(34,238,221,0.32); transform: translateX(4px); }
+    .file-ico { font-size: 1.05rem; }
+    .file-name { font-size: 0.82rem; color: var(--ink-light); }
+    .file-node:hover .file-name { color: var(--ink); }
+
+    /* 项目主题色 */
+    .proj-folder[data-theme="teal"]  { --theme: #22eedd; }
+    .proj-folder[data-theme="warm"]  { --theme: #F0955B; }
+    .proj-folder[data-theme="green"] { --theme: #8BC65A; }
+    .proj-folder[data-theme="purple"] { --theme: #A78BFA; }
+
+    /* 名称文字 + 色点：主题色标注 */
+    .folder-name, .sub-folder .folder-name { color: var(--theme, #22eedd); }
+    .folder-name::before {
+      content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+      background: var(--theme, #22eedd); margin-right: 8px; vertical-align: middle;
+      box-shadow: 0 0 8px var(--theme, #22eedd);
+    }
+    .sub-folder .folder-name::before { width: 8px; height: 8px; margin-right: 6px; }
+    .file-name::before {
+      content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--theme, #22eedd); margin-right: 6px; vertical-align: middle;
+      box-shadow: 0 0 6px var(--theme, #22eedd);
+    }
+
+    /* 扇形展开：子文件夹紧凑散开 */
+    .children-board .sub-folder:nth-child(1) { margin-top: 4px; }
+    .children-board .sub-folder:nth-child(2) { margin-top: 14px; }
+    .children-board .sub-folder:nth-child(3) { margin-top: 4px; }
+
+    /* 文件夹浮动呼吸动画 */
+    @keyframes folderFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+    .proj-folder > .folder-node { animation: folderFloat 3.2s ease-in-out infinite; }
+    .proj-folder.dragging > .folder-node { animation-play-state: paused; }
+    .proj-folder:nth-child(2) > .folder-node { animation-delay: 0s; }
+    .proj-folder:nth-child(3) > .folder-node { animation-delay: 0.9s; }
+    .proj-folder:nth-child(4) > .folder-node { animation-delay: 1.8s; }
+
+    /* hover 项目卡片 */
+    .proj-tooltip {
+      position: fixed; z-index: 350; pointer-events: none; /* 高于文件抽屉(300)，避免被盖 */
+      max-width: 300px; padding: 16px 18px;
+      background: rgba(17,19,24,0.96); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px; backdrop-filter: blur(10px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+      opacity: 0; transform: translateY(6px) scale(0.97);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .proj-tooltip.show { opacity: 1; transform: none; }
+    .proj-tooltip .pt-row { display: flex; gap: 10px; margin-bottom: 8px; }
+    .proj-tooltip .pt-row:last-child { margin-bottom: 0; }
+    .proj-tooltip .pt-label { flex: 0 0 auto; font-size: 0.7rem; font-weight: 700; color: var(--theme, #22eedd); padding-top: 1px; letter-spacing: 0.06em; }
+    .proj-tooltip .pt-text { font-size: 0.82rem; color: var(--ink-light); line-height: 1.6; }
+    .proj-tooltip .pt-text .pt-seg { display: inline-block; white-space: nowrap; } /* 词组/句子分段单元：内部不断行，单元间自动换行 */
+    /* 文件标签徽章 + 说明 */
+    .proj-tooltip .pt-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .proj-tooltip .pt-chip {
+      font-size: 0.7rem; font-weight: 600; padding: 2px 10px; border-radius: 99px;
+      color: var(--theme, #22eedd);
+      background: color-mix(in srgb, var(--theme, #22eedd) 13%, transparent);
+      border: 1px solid color-mix(in srgb, var(--theme, #22eedd) 42%, transparent);
+      white-space: nowrap;
+    }
+    .proj-tooltip .pt-tags + .pt-row { margin-top: 0; }
+
+    /* 文件详情模态框 */
+    .file-modal {
+      position: fixed; inset: 0; z-index: 400;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.62); backdrop-filter: blur(8px);
+      opacity: 0; pointer-events: none; transition: opacity .28s;
+    }
+    .file-modal.show { opacity: 1; pointer-events: auto; }
+    .file-modal-card {
+      background: var(--cream-dark); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px; padding: 30px 32px; max-width: 540px; width: 90%;
+      position: relative; transform: translateY(18px) scale(0.97);
+      transition: transform .3s cubic-bezier(.2,.7,.3,1);
+    }
+    .file-modal.show .file-modal-card { transform: none; }
+    .file-modal-close {
+      position: absolute; top: 14px; right: 18px; cursor: pointer;
+      font-size: 1.3rem; line-height: 1; color: var(--ink-faint);
+      background: none; border: none; transition: color .2s;
+    }
+    .file-modal-close:hover { color: var(--ink); }
+    .file-modal-ico { font-size: 2rem; display: block; margin-bottom: 14px; }
+    .file-modal-title { font-family: 'Noto Serif SC', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; color: var(--ink); }
+    .file-modal-body { font-size: 0.9rem; color: var(--ink-light); line-height: 1.8; }
+    .file-modal-card.has-pdf { max-width: 900px; }
+    .file-modal-card.has-image { max-width: min(92vw, 600px); }
+    .file-modal-card.has-image .file-modal-pdf { max-height: 78vh; overflow: auto; }
+    .file-modal-pdf { display: none; margin-top: 14px; }
+    .file-modal-pdf iframe {
+      width: 100%; height: 62vh; border: none;
+      border-radius: 10px; background: #fff;
+    }
+    .file-modal-pdf img {
+      display: block; margin: 0 auto;
+      max-width: 100%; width: auto; height: auto;
+      border-radius: 10px; background: #fff;
+    }
+
+    /* ===== PDF.js 交互注解视图 ===== */
+    .file-modal-card.has-anno { max-width: 940px; max-height: 88vh; overflow-y: auto; }
+    .pdfjs-wrap { width: 100%; }
+    .pdfjs-bar {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 8px 4px 12px; font-size: 0.85rem; color: var(--ink-light);
+    }
+    .pdfjs-bar button {
+      border: 1px solid rgba(0,0,0,0.12); background: #fff; color: var(--ink);
+      border-radius: 8px; padding: 3px 12px; cursor: pointer; font-size: 0.85rem;
+    }
+    .pdfjs-bar button:hover:not(:disabled) { border-color: #22eedd; color: #0a9c90; }
+    .pdfjs-bar button:disabled { opacity: 0.35; cursor: default; }
+    .pdfjs-stage { position: relative; width: 100%; overflow: hidden; border-radius: 10px; background: #fff; }
+    .pdfjs-stage canvas { display: block; width: 100%; height: auto; }
+    .pdf-anno-layer { position: absolute; inset: 0; }
+    /* 注解热点：teal 圆点 + 呼吸光圈 */
+    .pdf-anno-dot {
+      position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px;
+      cursor: pointer; z-index: 5;
+    }
+    .pdf-anno-dot::before {
+      content: ''; position: absolute; inset: 5px; border-radius: 50%;
+      background: rgba(34,238,221,0.92); border: 2px solid #fff;
+      box-shadow: 0 0 0 2px rgba(34,238,221,0.35), 0 2px 8px rgba(0,0,0,0.35);
+      transition: transform .2s ease;
+    }
+    .pdf-anno-dot::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: rgba(34,238,221,0.35);
+      animation: annoPulse 2.2s ease-out infinite;
+    }
+    .pdf-anno-dot:hover::before { transform: scale(1.25); }
+    @keyframes annoPulse {
+      0% { transform: scale(0.6); opacity: 0.9; }
+      70% { transform: scale(1.6); opacity: 0; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    /* 注解气泡 */
+    .pdf-anno-tip {
+      position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(6px);
+      width: max-content; max-width: 280px; padding: 10px 14px;
+      background: #13161f; color: #e8f6f4; font-size: 0.85rem; line-height: 1.75;
+      border: 1px solid rgba(34,238,221,0.45); border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease;
+      z-index: 20; white-space: normal; text-align: left;
+    }
+    .pdf-anno-tip::after {
+      content: ''; position: absolute; top: 100%; left: 50%; margin-left: -6px;
+      border: 6px solid transparent; border-top-color: #13161f;
+    }
+    .pdf-anno-dot:hover .pdf-anno-tip,
+    .pdf-anno-dot:focus .pdf-anno-tip { opacity: 1; transform: translateX(-50%) translateY(0); }
+    /* 热点靠页顶时气泡向下弹 */
+    .pdf-anno-dot.tip-below .pdf-anno-tip {
+      bottom: auto; top: calc(100% + 10px); transform: translateX(-50%) translateY(-6px);
+    }
+    .pdf-anno-dot.tip-below:hover .pdf-anno-tip { transform: translateX(-50%) translateY(0); }
+    .pdf-anno-dot.tip-below .pdf-anno-tip::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: #13161f; }
+    /* 编辑模式提示条 */
+    .pdf-edit-bar {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+      margin-top: 10px; padding: 8px 12px; font-size: 0.82rem;
+      background: rgba(34,238,221,0.08); border: 1px dashed rgba(34,238,221,0.5);
+      border-radius: 10px; color: var(--ink);
+    }
+    .pdf-edit-bar b { color: #0a9c90; }
+    .pdf-edit-bar button {
+      border: none; background: #22eedd; color: #06342f; font-weight: 600;
+      border-radius: 7px; padding: 4px 12px; cursor: pointer; font-size: 0.8rem;
+    }
+    .pdf-edit-bar button.warn { background: #f3b2a0; color: #5a1f0e; }
+    .pdfjs-stage.editing { cursor: crosshair; }
+    .pdfjs-stage.editing .pdf-anno-dot::after { animation: none; }
 
     /* ============================================================
        IP 展示板块 — 深色 + 翻转 + 曲线
@@ -752,6 +1126,45 @@
       font-size: 0.85rem; color: var(--ink); font-weight: 500;
       letter-spacing: 0.04em;
     }
+
+    .ip-convert {
+      margin-top: 4px;
+      font-size: 1.05rem;
+      color: #fff;
+      line-height: 1.7;
+    }
+    .ip-convert.reveal {
+      transition-delay: 0.5s;
+    }
+    .ip-convert .ip-convert-label {
+      background: linear-gradient(180deg, transparent 18%, rgba(255,138,61,0.85) 18%);
+      padding: 0 5px;
+    }
+    .ip-convert .ip-convert-num {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: #FF8A3D;
+      margin-left: 6px;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+      transform: scale(0.85);
+      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.65s;
+    }
+    .ip-convert.visible .ip-convert-num {
+      transform: scale(1);
+    }
+    /* 文字下方的上升弧线 + 箭头（与文字同色，融为一体） */
+    .ip-convert .ip-arrow {
+      position: absolute; left: 0; bottom: 0;
+      width: 100%; height: 24px; overflow: visible; pointer-events: none;
+    }
+    .ip-convert .ip-arrow-line {
+      stroke-dasharray: 100; stroke-dashoffset: 100;
+      transition: stroke-dashoffset 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s;
+    }
+    .ip-convert.visible .ip-arrow-line { stroke-dashoffset: 0; }
 
     .ip-data-tags {
       display: flex; flex-wrap: wrap; gap: 8px;
@@ -953,7 +1366,9 @@
       .hero-chat-col .chat-bubble::after { display: none; }
       .editorial-nums { gap: 16px; }
       .enum-val { font-size: clamp(2rem, 8vw, 3rem); }
-      .editorial-stmt { flex-direction: column; gap: 8px; }
+      .editorial-statements { flex-direction: column; align-items: stretch; max-width: 640px; }
+      .editorial-stmt { margin-top: 0 !important; flex: 0 1 auto; }
+      .stmt-connector { display: none; }
       .dash-grid { grid-template-columns: 1fr; }
       .cta-ring2 { display: none; }
     }
@@ -985,6 +1400,7 @@
   <span class="nav-logo">About me<span class="nav-logo-dot">.</span></span>
   <ul class="nav-links" id="navLinks">
     <li><a href="#story">经历</a></li>
+    <li><a href="#copydeck">文策</a></li>
     <li><a href="#ip">IP</a></li>
     <li><a href="#works">作品</a></li>
     <li><a href="#philosophy">理念</a></li>
@@ -1006,7 +1422,7 @@
       <div class="code-body">
         <div class="term-content" id="termContent"></div>
         <div class="term-links" id="termLinks" style="display:none;">
-          <div class="code-line" style="color:#aaa;">→ <a href="#works" style="color:#22eedd;text-decoration:underline;text-underline-offset:3px;">浏览作品</a>  |  → <a href="#contact" style="color:#a78bfa;text-decoration:underline;text-underline-offset:3px;">联系我</a></div>
+          <div class="code-line" style="color:#aaa;">→ <a href="#copydeck" style="color:#22eedd;text-decoration:underline;text-underline-offset:3px;">浏览作品</a>  |  → <a href="#contact" style="color:#a78bfa;text-decoration:underline;text-underline-offset:3px;">联系我</a></div>
           <div class="code-line term-line"><span class="term-prompt">❯</span> <span class="term-cursor">█</span></div>
         </div>
       </div>
@@ -1025,71 +1441,231 @@
       <h2 class="section-title" style="position:relative;z-index:1;">成长轨迹</h2>
     </div>
 
-    <!-- 顶部数字行 -->
-    <div class="editorial-nums reveal reveal-d1">
-      <div class="enum-item">
-        <span class="enum-prefix">近</span>
-        <span class="enum-val">
-          <span class="enum-ghost">10</span>
-          <span class="enum-anim"></span>
-        </span>
-        <span class="enum-unit">年整合营销</span>
+    <!-- 三句宣言 -->
+    <div class="editorial-statements">
+      <div class="editorial-stmt s1 reveal reveal-d1">
+        <svg class="editorial-stmt-step" viewBox="0 0 16 20" aria-hidden="true"><path d="M8 0 L16 9 H11 V20 H5 V9 H0 Z" fill="currentColor"/></svg>
+        <div class="editorial-stmt-num">
+          <span class="editorial-num-val">3年</span>
+          <span class="editorial-num-unit">乙方文策</span>
+        </div>
+        <span class="editorial-stmt-year">2017-2020</span>
+        <p class="editorial-stmt-text">从文案到核心策划</p>
+        <p class="editorial-stmt-chain"><span class="chain-line"><span class="chain-word">文案表达</span><span class="chain-arrow">→</span><span class="chain-word">传播思考</span><span class="chain-arrow">→</span><span class="chain-word">营销策划</span></span></p>
+        <p class="editorial-stmt-desc">逐渐建立对品牌传播、项目营销的整体理解</p>
       </div>
-      <span class="enum-sep">⊹</span>
-      <div class="enum-item">
-        <span class="enum-val">
-          <span class="enum-ghost">3</span>
-          <span class="enum-anim"></span>
-        </span>
-        <span class="enum-unit">年地产广告</span>
+      <span class="stmt-connector" aria-hidden="true"></span>
+      <div class="editorial-stmt s2 reveal reveal-d2">
+        <svg class="editorial-stmt-step" viewBox="0 0 16 20" aria-hidden="true"><path d="M8 0 L16 9 H11 V20 H5 V9 H0 Z" fill="currentColor"/></svg>
+        <div class="editorial-stmt-num">
+          <span class="editorial-num-val">6年</span>
+          <span class="editorial-num-unit">甲方品牌</span>
+        </div>
+        <span class="editorial-stmt-year">2020-2026</span>
+        <p class="editorial-stmt-text">从项目到品牌建设</p>
+        <p class="editorial-stmt-chain"><span class="chain-line"><span class="chain-word">项目策略</span><span class="chain-arrow">→</span><span class="chain-word">具体业务</span><span class="chain-arrow">→</span><span class="chain-word">专业对象IP / 内容</span></span><span class="chain-line"><span class="chain-arrow">→</span><span class="chain-word">团队与组织</span><span class="chain-arrow">→</span><span class="chain-word">品牌公信</span></span></p>
+        <p class="editorial-stmt-desc">进入真实业务与长期品牌建设，逐渐扩大自己能够判断和推动的范围</p>
       </div>
-      <span class="enum-sep">⊹</span>
-      <div class="enum-item">
-        <span class="enum-val">
-          <span class="enum-ghost">6</span>
-          <span class="enum-anim"></span>
-        </span>
-        <span class="enum-unit">年健康领域</span>
+      <span class="stmt-connector" aria-hidden="true"></span>
+      <div class="editorial-stmt s3 reveal reveal-d3">
+        <svg class="editorial-stmt-step" viewBox="0 0 16 20" aria-hidden="true"><path d="M8 0 L16 9 H11 V20 H5 V9 H0 Z" fill="currentColor"/></svg>
+        <div class="editorial-stmt-num">
+          <span class="editorial-num-val">10年</span>
+          <span class="editorial-num-unit">整合营销</span>
+        </div>
+        <span class="editorial-stmt-year">0-1体系</span>
+        <p class="editorial-stmt-text">从经验进入更大的现实</p>
+        <p class="editorial-stmt-chain"><span class="chain-line"><span class="chain-word">内容</span><span class="chain-arrow">→</span><span class="chain-word">品牌</span><span class="chain-arrow">→</span><span class="chain-word">业务</span><span class="chain-arrow">→</span><span class="chain-word">用户 / 产品</span><span class="chain-arrow">→</span><span class="chain-word">商业</span></span></p>
+        <p class="editorial-stmt-desc">保留品牌与内容的核心能力，继续向用户、产品与商业延伸，让判断进入更完整的现实链路</p>
       </div>
-      <span class="enum-sep">⊹</span>
-      <div class="enum-item">
-        <span class="enum-arrow">0-1</span>
-        <span class="enum-unit">品牌体系搭建</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     文策展示 — 方案 / 思维导图 / 文案
+     ============================================================ -->
+<section class="section" id="copydeck">
+  <div class="container">
+    <div class="section-header reveal" style="position:relative;">
+      <span class="section-subtitle">Strategy & Execution</span>
+      <span class="section-number" style="position:relative;z-index:1;">02</span>
+      <h2 class="section-title" style="position:relative;z-index:1;">策略·落地</h2>
+    </div>
+  </div>
+
+  <!-- 文件夹看板 -->
+  <div class="folder-board reveal reveal-d1" id="folderBoard">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="folderGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F9D97A"/><stop offset="1" stop-color="#E8B94A"/></linearGradient><filter id="chalkFilter"><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" result="noise" seed="2"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
+
+    <!-- 项目 1：内容与表达 -->
+    <div class="proj-folder" data-theme="warm" style="left:58%;top:24%;">
+      <div class="folder-node" data-toggle data-note="城市/文化理解 · 人物叙事|概念创意 · 审美哲思">
+        <svg class="folder-svg" width="72" height="63" viewBox="0 0 64 56" aria-hidden="true"><path class="f-body" d="M6 16 a5 5 0 0 1 5-5 h14 l7 7 h20 a5 5 0 0 1 5 5 v22 a5 5 0 0 1-5 5 H11 a5 5 0 0 1-5-5 z" fill="url(#folderGrad)"/><path class="f-tab" d="M11 11 h14 l7 7 H11 z" fill="#D9A83A"/><path class="f-highlight" d="M8 22 h48 v4 H8 z" fill="rgba(255,255,255,0.35)"/></svg>
+        <span class="folder-name">内容与表达</span>
+        <button class="folder-dl" data-zip="内容与表达" title="打包下载整个文件夹 (zip)">⬇</button>
+      </div>
+      <div class="folder-children">
+        <div class="children-board">
+          <div class="sub-folder">
+            <div class="folder-node" data-toggle data-note="品牌/空间/审美">
+              <svg class="folder-svg" width="72" height="63" viewBox="0 0 64 56" aria-hidden="true"><path class="f-body" d="M6 16 a5 5 0 0 1 5-5 h14 l7 7 h20 a5 5 0 0 1 5 5 v22 a5 5 0 0 1-5 5 H11 a5 5 0 0 1-5-5 z" fill="url(#folderGrad)"/><path class="f-tab" d="M11 11 h14 l7 7 H11 z" fill="#D9A83A"/><path class="f-highlight" d="M8 22 h48 v4 H8 z" fill="rgba(255,255,255,0.35)"/></svg>
+              <span class="folder-name">室内设计</span>
+              <button class="folder-dl" data-zip="室内设计" title="打包下载整个文件夹 (zip)">⬇</button>
+            </div>
+            <div class="folder-children"><div class="children-board">
+              <div class="file-node" data-file="「质」见，一场厚积薄发的惊艳" data-tag="品牌文案" data-desc="以「质」切入的品牌文案，诠释厚积薄发的品牌质感与匠心" data-pdf="uploads/pdfs/室内设计/「质」见，一场厚积薄发的惊艳.pdf"><span class="file-ico">📄</span><span class="file-name">「质」见，一场厚积薄发的惊艳</span></div>
+              <div class="file-node" data-file="从无到优的创造力，成全向往的甜蜜" data-tag="品牌文案" data-desc="以「从无到优」的创造力为主旨，写空间成全对甜蜜生活的向往" data-pdf="uploads/pdfs/室内设计/从无到优的创造力，成全向往的甜蜜.pdf"><span class="file-ico">📄</span><span class="file-name">从无到优的创造力，成全向往的甜蜜</span></div>
+              <div class="file-node" data-file="器韵丨让流逝，成就美的凝练" data-tag="品牌文案" data-desc="器物之韵主题，写时间流逝中美的凝练与沉淀" data-pdf="uploads/pdfs/室内设计/器韵丨让流逝，成就美的凝练.pdf"><span class="file-ico">📄</span><span class="file-name">器韵丨让流逝，成就美的凝练</span></div>
+              <div class="file-node" data-file="声色未喧，早已纵身入野" data-tag="品牌文案" data-desc="自然主题文案，写未及喧哗便纵情山野的空间意境" data-pdf="uploads/pdfs/室内设计/声色未喧，早已纵身入野.pdf"><span class="file-ico">📄</span><span class="file-name">声色未喧，早已纵身入野</span></div>
+              <div class="file-node" data-file="对话的方式，真诚有回信" data-tag="品牌文案" data-desc="以「真诚对话」切入，写品牌与用户之间双向回应的温度" data-pdf="uploads/pdfs/室内设计/对话的方式，真诚有回信.pdf"><span class="file-ico">📄</span><span class="file-name">对话的方式，真诚有回信</span></div>
+              <div class="file-node" data-file="将难点作为支点，创造以人为本的长远" data-tag="品牌文案" data-desc="以人为本主题，把设计难点转化为创造长远价值的支点" data-pdf="uploads/pdfs/室内设计/将难点作为支点，创造以人为本的长远.pdf"><span class="file-ico">📄</span><span class="file-name">将难点作为支点，创造以人为本的长远</span></div>
+              <div class="file-node" data-file="承半生书卷，续写生活新篇" data-tag="品牌文案" data-desc="书卷气主题，写人文底蕴与生活新篇章的承接延续" data-pdf="uploads/pdfs/室内设计/承半生书卷，续写生活新篇.pdf"><span class="file-ico">📄</span><span class="file-name">承半生书卷，续写生活新篇</span></div>
+              <div class="file-node" data-file="梦的高度，在此腾空" data-tag="品牌文案" data-desc="以「梦想」为主题，写空间承载并托起理想的高度" data-pdf="uploads/pdfs/室内设计/梦的高度，在此腾空.pdf"><span class="file-ico">📄</span><span class="file-name">梦的高度，在此腾空</span></div>
+              <div class="file-node" data-file="生活的褒奖，来自这样一个家" data-tag="品牌文案" data-desc="以「家」为主题，写家作为生活褒奖的温暖落点" data-pdf="uploads/pdfs/室内设计/生活的褒奖，来自这样一个家.pdf"><span class="file-ico">📄</span><span class="file-name">生活的褒奖，来自这样一个家</span></div>
+              <div class="file-node" data-file="精神足够深刻，直邀你赞叹此生足矣" data-tag="品牌文案" data-desc="写空间带来的深刻精神体验，让人由衷赞叹" data-pdf="uploads/pdfs/室内设计/精神足够深刻，直邀你赞叹此生足矣.pdf"><span class="file-ico">📄</span><span class="file-name">精神足够深刻，直邀你赞叹此生足矣</span></div>
+              <div class="file-node" data-file="自然始终，是生活" data-tag="品牌文案" data-desc="自然生活主题，写空间回归本真、以自然为底的生活" data-pdf="uploads/pdfs/室内设计/自然始终，是生活.pdf"><span class="file-ico">📄</span><span class="file-name">自然始终，是生活</span></div>
+              <div class="file-node" data-file="艺术家的一场隐秘坦白" data-tag="品牌文案" data-desc="艺术主题文案，写空间作为艺术家隐秘自我表达的载体" data-pdf="uploads/pdfs/室内设计/艺术家的一场隐秘坦白.pdf"><span class="file-ico">📄</span><span class="file-name">艺术家的一场隐秘坦白</span></div>
+              <div class="file-node" data-file="让家，成为你的生活引言" data-tag="品牌文案" data-desc="以「家」作生活引言，写空间开启生活的序章" data-pdf="uploads/pdfs/室内设计/让家，成为你的生活引言.pdf"><span class="file-ico">📄</span><span class="file-name">让家，成为你的生活引言</span></div>
+              <div class="file-node" data-file="非典型审美，偏是冒险家的特权" data-tag="品牌文案" data-desc="非典型审美主题，写敢于冒险的独特品味与态度" data-pdf="uploads/pdfs/室内设计/非典型审美，偏是冒险家的特权.pdf"><span class="file-ico">📄</span><span class="file-name">非典型审美，偏是冒险家的特权</span></div>
+            </div></div>
+          </div>
+          <div class="sub-folder">
+            <div class="folder-node" data-toggle data-note="人物/洞察/叙事">
+              <svg class="folder-svg" width="72" height="63" viewBox="0 0 64 56" aria-hidden="true"><path class="f-body" d="M6 16 a5 5 0 0 1 5-5 h14 l7 7 h20 a5 5 0 0 1 5 5 v22 a5 5 0 0 1-5 5 H11 a5 5 0 0 1-5-5 z" fill="url(#folderGrad)"/><path class="f-tab" d="M11 11 h14 l7 7 H11 z" fill="#D9A83A"/><path class="f-highlight" d="M8 22 h48 v4 H8 z" fill="rgba(255,255,255,0.35)"/></svg>
+              <span class="folder-name">人物专栏</span>
+              <button class="folder-dl" data-zip="人物专栏" title="打包下载整个文件夹 (zip)">⬇</button>
+            </div>
+            <div class="folder-children"><div class="children-board">
+              <div class="file-node" data-file="书法名家张叔言的传奇写意" data-tag="人物专访" data-desc="书法名家张叔言的人物故事，记录其艺术人生的传奇与写意" data-pdf="uploads/pdfs/人物专栏/书法名家张叔言的传奇写意.pdf"><span class="file-ico">📄</span><span class="file-name">书法名家张叔言的传奇写意</span></div>
+              <div class="file-node" data-file="他说：我的特别之处，与性别无关" data-tag="人物专访" data-desc="人物专访，讲述主角不被性别定义的故事" data-pdf="uploads/pdfs/人物专栏/人物专栏-他说：我的特别之处，与性别无关.pdf"><span class="file-ico">📄</span><span class="file-name">他说：我的特别之处，与性别无关</span></div>
+              <div class="file-node" data-file="他说：有时候只需要一个支点，便能撑起功能障碍者的春天" data-tag="人物专访" data-desc="人物专访，记录功能障碍者被一个支点撑起的人生" data-pdf="uploads/pdfs/人物专栏/人物专栏-他说：有时候只需要一个支点，便能撑起功能障碍者的春天.pdf"><span class="file-ico">📄</span><span class="file-name">他说：有时候只需要一个支点，便能撑起功能障碍者的春天</span></div>
+              <div class="file-node" data-file="她说：关注女性康复，从内而外做自己" data-tag="人物专访" data-desc="女性康复主题专访，关注从内而外的自我重建" data-pdf="uploads/pdfs/人物专栏/人物专栏-她说：关注女性康复，从内而外做自己.pdf"><span class="file-ico">📄</span><span class="file-name">她说：关注女性康复，从内而外做自己</span></div>
+              <div class="file-node" data-file="她说：异乡，不是一场流浪" data-tag="人物专访" data-desc="人物专访，讲述异乡人在此找到归属的故事" data-pdf="uploads/pdfs/人物专栏/人物专栏-她说：异乡，不是一场流浪.pdf"><span class="file-ico">📄</span><span class="file-name">她说：异乡，不是一场流浪</span></div>
+              <div class="file-node" data-file="国际护理研究名人堂-何教授" data-tag="人物专访" data-desc="何教授的人物专访，记录其护理研究与成就" data-pdf="uploads/pdfs/人物专栏/国际护理研究名人堂-何教授.pdf"><span class="file-ico">📄</span><span class="file-name">国际护理研究名人堂-何教授</span></div>
+              <div class="file-node" data-file="康复，从“和”说起" data-tag="人物专访" data-desc="康复主题专访，以「和」切入医患与身心之和" data-pdf="uploads/pdfs/人物专栏/康复，从“和”说起.pdf"><span class="file-ico">📄</span><span class="file-name">康复，从“和”说起</span></div>
+            </div></div>
+          </div>
+          <div class="sub-folder">
+            <div class="folder-node" data-toggle data-note="品牌/城市/人文">
+              <svg class="folder-svg" width="72" height="63" viewBox="0 0 64 56" aria-hidden="true"><path class="f-body" d="M6 16 a5 5 0 0 1 5-5 h14 l7 7 h20 a5 5 0 0 1 5 5 v22 a5 5 0 0 1-5 5 H11 a5 5 0 0 1-5-5 z" fill="url(#folderGrad)"/><path class="f-tab" d="M11 11 h14 l7 7 H11 z" fill="#D9A83A"/><path class="f-highlight" d="M8 22 h48 v4 H8 z" fill="rgba(255,255,255,0.35)"/></svg>
+              <span class="folder-name">地产广告</span>
+              <button class="folder-dl" data-zip="地产广告" title="打包下载整个文件夹 (zip)">⬇</button>
+            </div>
+            <div class="folder-children"><div class="children-board">
+              <div class="file-node" data-file="匠说天成丨镌述形与意，雅筑知新" data-tag="地产文案" data-desc="项目案名与形意主题文案，塑造雅筑产品气质" data-pdf="uploads/pdfs/地产广告/匠说天成丨镌述形与意，雅筑知新.pdf"><span class="file-ico">📄</span><span class="file-name">匠说天成丨镌述形与意，雅筑知新</span></div>
+              <div class="file-node" data-file="听风起，转身拾翠，生活便藏进夏日的诗里" data-tag="地产文案" data-desc="夏日诗意主题文案，写园林与生活的画面感" data-pdf="uploads/pdfs/地产广告/听风起，转身拾翠，生活便藏进夏日的诗里.pdf"><span class="file-ico">📄</span><span class="file-name">听风起，转身拾翠，生活便藏进夏日的诗里</span></div>
+              <div class="file-node" data-file="园林诗画“三境界”，雅筑知新" data-tag="地产文案" data-desc="园林「三境界」主题文案，诠释雅筑园林意境" data-pdf="uploads/pdfs/地产广告/园林诗画“三境界”，雅筑知新.pdf"><span class="file-ico">📄</span><span class="file-name">园林诗画“三境界”，雅筑知新</span></div>
+              <div class="file-node" data-file="城事  沪上诗意栖居之地，俯仰皆是繁华盛景" data-tag="地产文案" data-desc="城市项目文案，写沪上诗意栖居与繁华盛景" data-pdf="uploads/pdfs/地产广告/城事  沪上诗意栖居之地，俯仰皆是繁华盛景.pdf"><span class="file-ico">📄</span><span class="file-name">城事 沪上诗意栖居之地，俯仰皆是繁华盛景</span></div>
+              <div class="file-node" data-file="翔安足迹系列刷屏文字" data-tag="地产文案" data-desc="翔安项目系列刷屏文案，记录城市足迹与地域情怀" data-pdf="uploads/pdfs/地产广告/翔安足迹系列刷屏文字.pdf"><span class="file-ico">📄</span><span class="file-name">翔安足迹系列刷屏文字</span></div>
+            </div></div>
+          </div>
+          <div class="sub-folder">
+            <div class="folder-node" data-toggle data-note="创意/视觉/转译">
+              <svg class="folder-svg" width="72" height="63" viewBox="0 0 64 56" aria-hidden="true"><path class="f-body" d="M6 16 a5 5 0 0 1 5-5 h14 l7 7 h20 a5 5 0 0 1 5 5 v22 a5 5 0 0 1-5 5 H11 a5 5 0 0 1-5-5 z" fill="url(#folderGrad)"/><path class="f-tab" d="M11 11 h14 l7 7 H11 z" fill="#D9A83A"/><path class="f-highlight" d="M8 22 h48 v4 H8 z" fill="rgba(255,255,255,0.35)"/></svg>
+              <span class="folder-name">条漫大赛</span>
+              <button class="folder-dl" data-zip="条漫大赛" title="打包下载整个文件夹 (zip)">⬇</button>
+            </div>
+            <div class="folder-children"><div class="children-board">
+              <div class="file-node" data-file="大内密报" data-tag="科普条漫" data-desc="医疗健康科普条漫，用趣味形式传递健康知识" data-pdf="uploads/pdfs/条漫大赛/大内密报.jpg"><span class="file-ico">🖼️</span><span class="file-name">大内密报</span></div>
+              <div class="file-node" data-file="朋友圈的神展开" data-tag="科普条漫" data-desc="医疗科普条漫，借朋友圈场景展开健康话题" data-pdf="uploads/pdfs/条漫大赛/朋友圈的神展开.jpg"><span class="file-ico">🖼️</span><span class="file-name">朋友圈的神展开</span></div>
+              <div class="file-node" data-file="脑卒中康复丨必须懂的“梗”你知道多少" data-tag="科普条漫" data-desc="脑卒中康复科普条漫，用「梗」讲透康复知识" data-pdf="uploads/pdfs/条漫大赛/脑卒中康复丨必须懂的“梗”你知道多少.jpg"><span class="file-ico">🖼️</span><span class="file-name">脑卒中康复丨必须懂的“梗”你知道多少</span></div>
+            </div></div>
+          </div>
+          <div class="sub-folder">
+            <div class="folder-node" data-toggle data-note="营销/转译/传播">
+              <svg class="folder-svg" width="72" height="63" viewBox="0 0 64 56" aria-hidden="true"><path class="f-body" d="M6 16 a5 5 0 0 1 5-5 h14 l7 7 h20 a5 5 0 0 1 5 5 v22 a5 5 0 0 1-5 5 H11 a5 5 0 0 1-5-5 z" fill="url(#folderGrad)"/><path class="f-tab" d="M11 11 h14 l7 7 H11 z" fill="#D9A83A"/><path class="f-highlight" d="M8 22 h48 v4 H8 z" fill="rgba(255,255,255,0.35)"/></svg>
+              <span class="folder-name">节点与活动</span>
+              <button class="folder-dl" data-zip="节点与活动" title="打包下载整个文件夹 (zip)">⬇</button>
+            </div>
+            <div class="folder-children"><div class="children-board">
+              <div class="file-node" data-file="CBA全明星周末-预热刷屏" data-tag="节点营销" data-desc="CBA 全明星周末节点预热传播文案" data-pdf="uploads/pdfs/节点与活动/CBA全明星周末-预热刷屏.pdf"><span class="file-ico">📄</span><span class="file-name">CBA全明星周末-预热刷屏</span></div>
+              <div class="file-node" data-file="世界关节炎日" data-tag="节点营销" data-desc="世界关节炎日节点海报文案" data-pdf="uploads/pdfs/节点与活动/世界关节炎日.png"><span class="file-ico">🖼️</span><span class="file-name">世界关节炎日</span></div>
+              <div class="file-node" data-file="世界脊柱日" data-tag="节点营销" data-desc="世界脊柱日节点海报文案" data-pdf="uploads/pdfs/节点与活动/世界脊柱日.png"><span class="file-ico">🖼️</span><span class="file-name">世界脊柱日</span></div>
+              <div class="file-node" data-file="中秋佳节" data-tag="节点营销" data-desc="中秋节节点海报文案" data-pdf="uploads/pdfs/节点与活动/中秋佳节.png"><span class="file-ico">🖼️</span><span class="file-name">中秋佳节</span></div>
+              <div class="file-node" data-file="医师节主题" data-tag="节点营销" data-desc="医师节主题节点海报文案" data-pdf="uploads/pdfs/节点与活动/医师节主题.png"><span class="file-ico">🖼️</span><span class="file-name">医师节主题</span></div>
+              <div class="file-node" data-file="升学季-高压氧推广系列" data-tag="节点营销" data-desc="升学季节点的高压氧推广系列文案" data-pdf="uploads/pdfs/节点与活动/升学季-高压氧推广系列.pdf"><span class="file-ico">📄</span><span class="file-name">升学季-高压氧推广系列</span></div>
+              <div class="file-node" data-file="帕金森日单图" data-tag="节点营销" data-desc="帕金森日单图海报文案" data-pdf="uploads/pdfs/节点与活动/帕金森日单图.pdf"><span class="file-ico">📄</span><span class="file-name">帕金森日单图</span></div>
+              <div class="file-node" data-file="年度回顾-感谢一路的难，让我们披荆斩浪，迎潮而立" data-tag="节点营销" data-desc="年度回顾主题刷屏文案，感恩一路同行" data-pdf="uploads/pdfs/节点与活动/年度回顾-感谢一路的难，让我们披荆斩浪，迎潮而立.pdf"><span class="file-ico">📄</span><span class="file-name">年度回顾-感谢一路的难，让我们披荆斩浪，迎潮而立</span></div>
+              <div class="file-node" data-file="惠厦保合作单图" data-tag="活动策划" data-desc="惠厦保合作推广单图文案" data-pdf="uploads/pdfs/节点与活动/惠厦保合作单图.jpg"><span class="file-ico">🖼️</span><span class="file-name">惠厦保合作单图</span></div>
+              <div class="file-node" data-file="招聘-世界的国贸，让人才恰到“好”处" data-tag="活动策划" data-desc="招聘主题文案，以「恰到好处」吸引人才" data-pdf="uploads/pdfs/节点与活动/招聘-世界的国贸，让人才恰到“好”处.pdf"><span class="file-ico">📄</span><span class="file-name">招聘-世界的国贸，让人才恰到“好”处</span></div>
+              <div class="file-node" data-file="新春系列刷屏" data-tag="节点营销" data-desc="新春系列刷屏文案" data-pdf="uploads/pdfs/节点与活动/新春系列刷屏.pdf"><span class="file-ico">📄</span><span class="file-name">新春系列刷屏</span></div>
+              <div class="file-node" data-file="活动-猛虎召集令" data-tag="活动策划" data-desc="猛虎召集令活动相关素材" data-pdf="uploads/pdfs/节点与活动/活动-猛虎召集令.jpg"><span class="file-ico">🖼️</span><span class="file-name">活动-猛虎召集令</span></div>
+              <div class="file-node" data-file="赛事保障- CBA动员仪式横幅及主背景文字" data-tag="活动策划" data-desc="CBA 动员仪式横幅及主背景文字" data-pdf="uploads/pdfs/节点与活动/赛事保障- CBA动员仪式横幅及主背景文字.pdf"><span class="file-ico">📄</span><span class="file-name">赛事保障- CBA动员仪式横幅及主背景文字</span></div>
+              <div class="file-node" data-file="赛事保障-马拉松宣传系列" data-tag="活动策划" data-desc="马拉松赛事宣传系列文案" data-pdf="uploads/pdfs/节点与活动/赛事保障-马拉松宣传系列.pdf"><span class="file-ico">📄</span><span class="file-name">赛事保障-马拉松宣传系列</span></div>
+              <div class="file-node" data-file="高考季高压氧营销单图" data-tag="节点营销" data-desc="高考季节点的高压氧营销单图文案" data-pdf="uploads/pdfs/节点与活动/高考季高压氧营销单图.pdf"><span class="file-ico">📄</span><span class="file-name">高考季高压氧营销单图</span></div>
+            </div></div>
+          </div>
+          <div class="sub-folder">
+            <div class="folder-node" data-toggle data-note="视听/立意/创作">
+              <svg class="folder-svg" width="72" height="63" viewBox="0 0 64 56" aria-hidden="true"><path class="f-body" d="M6 16 a5 5 0 0 1 5-5 h14 l7 7 h20 a5 5 0 0 1 5 5 v22 a5 5 0 0 1-5 5 H11 a5 5 0 0 1-5-5 z" fill="url(#folderGrad)"/><path class="f-tab" d="M11 11 h14 l7 7 H11 z" fill="#D9A83A"/><path class="f-highlight" d="M8 22 h48 v4 H8 z" fill="rgba(255,255,255,0.35)"/></svg>
+              <span class="folder-name">视频脚本</span>
+              <button class="folder-dl" data-zip="视频脚本" title="打包下载整个文件夹 (zip)">⬇</button>
+            </div>
+            <div class="folder-children"><div class="children-board">
+              <div class="file-node" data-file="人生倍速-脚本_分镜" data-tag="视频脚本" data-desc="短视频脚本与分镜，以「人生倍速」讲述品牌故事" data-pdf="uploads/pdfs/视频脚本/人生倍速-脚本_分镜.pdf"><span class="file-ico">📄</span><span class="file-name">人生倍速-脚本_分镜</span></div>
+              <div class="file-node" data-file="生命的反响" data-tag="视频脚本" data-desc="视频脚本，以「生命的反响」传递品牌价值" data-pdf="uploads/pdfs/视频脚本/生命的反响.pdf"><span class="file-ico">📄</span><span class="file-name">生命的反响</span></div>
+            </div></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- 三句宣言 -->
-    <div class="editorial-statements reveal reveal-d2">
-      <div class="editorial-stmt">
-        <div class="editorial-stmt-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="2" width="14" height="14" transform="rotate(45 12 2)"/></svg></div>
-        <div class="editorial-stmt-body">
-          <p class="editorial-stmt-text">从被甲方质疑到指定项目主笔，地产三年让我摸到了文策的关窍</p>
-          <span class="editorial-stmt-tag">洞察</span>
-        </div>
+    <!-- 项目 5：个人探索 -->
+    <div class="proj-folder" data-theme="green" style="left:76%;top:9%;">
+      <div class="folder-node" data-toggle data-drawer data-note="主动选择不同的对象与命题，通过独立创作与实践，探索不同表达的可能性，拓展自身的策划与创意能力">
+        <svg class="folder-svg" width="72" height="63" viewBox="0 0 64 56" aria-hidden="true"><path class="f-body" d="M6 16 a5 5 0 0 1 5-5 h14 l7 7 h20 a5 5 0 0 1 5 5 v22 a5 5 0 0 1-5 5 H11 a5 5 0 0 1-5-5 z" fill="url(#folderGrad)"/><path class="f-tab" d="M11 11 h14 l7 7 H11 z" fill="#D9A83A"/><path class="f-highlight" d="M8 22 h48 v4 H8 z" fill="rgba(255,255,255,0.35)"/></svg>
+        <span class="folder-name">个人探索</span>
+        <button class="folder-dl" data-zip="个人探索" title="打包下载整个文件夹 (zip)">⬇</button>
       </div>
-      <div class="editorial-stmt">
-        <div class="editorial-stmt-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L22 21H2Z"/></svg></div>
-        <div class="editorial-stmt-body">
-          <p class="editorial-stmt-text">六年的医疗深耕，闭环从内容矩阵到线下问诊转化的可追踪链路</p>
-          <span class="editorial-stmt-tag">构建</span>
-        </div>
-      </div>
-      <div class="editorial-stmt">
-        <div class="editorial-stmt-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/></svg></div>
-        <div class="editorial-stmt-body">
-          <p class="editorial-stmt-text">致力于品牌全案的整合落地，追求创意的可行与延伸</p>
-          <span class="editorial-stmt-tag">整合</span>
-        </div>
-      </div>
-      <!-- 愿景 -->
-      <div class="editorial-stmt reveal reveal-d3">
-        <div class="editorial-stmt-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><ellipse cx="7" cy="7" rx="4" ry="4" transform="rotate(45 7 7)"/><ellipse cx="17" cy="7" rx="4" ry="4" transform="rotate(-45 17 7)"/><ellipse cx="7" cy="17" rx="4" ry="4" transform="rotate(-45 7 17)"/><ellipse cx="17" cy="17" rx="4" ry="4" transform="rotate(45 17 17)"/></svg></div>
-        <div class="editorial-stmt-body">
-          <p class="editorial-stmt-text">未来将更专注于内容创作与品牌叙事的深度发展</p>
-          <span class="editorial-stmt-tag">愿景</span>
+      <div class="folder-children">
+        <div class="children-board">
+          <div class="file-node" data-file="厦门市托育服务发展品牌设计方案" data-tag="品牌概念 / IP创意 / 视觉延展" data-desc="围绕托育品牌命题独立完成三组方案，从命名、品牌概念到IP与视觉延展进行完整探索，作品入围前十" data-pdf="uploads/pdfs/参赛作品/个人参赛作品-厦门市托育服务发展品牌名称（口号）和吉祥物（Logo）设计方案.pdf"><span class="file-ico">📄</span><span class="file-name">厦门市托育服务发展品牌设计方案</span></div>
+          <div class="file-node" data-file="文化研究与叙事-状元插金花" data-tag="非遗传承 / 内容策划 / 品牌叙事" data-desc="寻找传统文化进入当代叙事的切口" data-pdf="uploads/pdfs/个人探索/文化研究与叙事-状元插金花.pdf"><span class="file-ico">📄</span><span class="file-name">文化研究与叙事-状元插金花</span></div>
+          <div class="file-node" data-file="新滋补养身线下品牌-小眠羊" data-tag="产品策略 / 对象理解 / 概念延展" data-desc="从目标人群与产品定位出发自创品牌方向，形成“小眠羊”概念，并进一步延展出羊村、产品生态与场景表达" data-pdf="uploads/pdfs/个人探索/新滋补养身线下品牌-小眠羊.pdf"><span class="file-ico">📄</span><span class="file-name">新滋补养身线下品牌-小眠羊</span></div>
         </div>
       </div>
     </div>
+
+    <!-- 项目 6：IP孵化 -->
+    <div class="proj-folder" data-theme="purple" style="left:40%;top:28%;">
+      <div class="folder-node" data-toggle data-note="从单个IP实践到内容机制探索，关注IP如何建立、持续生长并形成可复制的内容能力">
+        <svg class="folder-svg" width="72" height="63" viewBox="0 0 64 56" aria-hidden="true"><path class="f-body" d="M6 16 a5 5 0 0 1 5-5 h14 l7 7 h20 a5 5 0 0 1 5 5 v22 a5 5 0 0 1-5 5 H11 a5 5 0 0 1-5-5 z" fill="url(#folderGrad)"/><path class="f-tab" d="M11 11 h14 l7 7 H11 z" fill="#D9A83A"/><path class="f-highlight" d="M8 22 h48 v4 H8 z" fill="rgba(255,255,255,0.35)"/></svg>
+        <span class="folder-name">IP孵化</span>
+      </div>
+      <div class="folder-children">
+        <div class="children-board">
+          <div class="file-node" data-file="糖足保肢IP孵化" data-tag="对象理解 / 价值提炼 / 内容策略 / 持续实验" data-desc="不把医生套进标准化内容模板，而是先理解医生的专业价值、个人特质与患者关系，再找到人与专业价值都能成立的内容表达，并通过持续运营验证" data-pdf="uploads/pdfs/IP孵化/崔博糖足保肢IP孵化.pdf"><span class="file-ico">📄</span><span class="file-name">糖足保肢IP孵化</span></div>
+          <div class="file-node" data-file="“医线创星计”方案" data-tag="IP矩阵 / 内容机制 / 组织协同" data-desc="从单个医生IP的实践进一步思考：如何让专业人员持续产生内容，因此从个人IP延伸到内部共创、IP矩阵与内容机制" data-pdf="uploads/pdfs/IP孵化/”医线创星计“方案.pdf"><span class="file-ico">📄</span><span class="file-name">“医线创星计”方案</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 项目 5：策划与推广 -->
+    <div class="proj-folder" data-theme="teal" style="left:20%;top:16%;">
+      <div class="folder-node" data-toggle data-drawer data-note="品牌判断 · 综合业务策划|产品 / 商业反思 · 跨对象价值重组|组织与机制设计 · 品牌管理">
+        <svg class="folder-svg" width="72" height="63" viewBox="0 0 64 56" aria-hidden="true"><path class="f-body" d="M6 16 a5 5 0 0 1 5-5 h14 l7 7 h20 a5 5 0 0 1 5 5 v22 a5 5 0 0 1-5 5 H11 a5 5 0 0 1-5-5 z" fill="url(#folderGrad)"/><path class="f-tab" d="M11 11 h14 l7 7 H11 z" fill="#D9A83A"/><path class="f-highlight" d="M8 22 h48 v4 H8 z" fill="rgba(255,255,255,0.35)"/></svg>
+        <span class="folder-name">策划与推广</span>
+        <button class="folder-dl" data-zip="策划与推广" title="打包下载整个文件夹 (zip)">⬇</button>
+      </div>
+      <div class="folder-children">
+        <div class="children-board">
+          <div class="file-node" data-file="品牌部年度提案" data-tag="品牌判断" data-desc="围绕年度营收目标，梳理品牌现状与阶段任务，建立年度传播策略，并统筹主题、内容、节点与渠道" data-pdf="uploads/pdfs/策划与推广/品牌部年度推广案.pdf"><span class="file-ico">📄</span><span class="file-name">品牌部年度提案</span></div>
+          <div class="file-node" data-file="景粼原著半年报" data-tag="市场 / 产品 / 传播判断" data-desc="从连续销冠与市场竞争中找到“第一”之外的产品价值，把“第一”进一步推向“唯一”，并转化为后续传播的核心抓手" data-pdf="uploads/pdfs/策划与推广/景粼原著半年报.pdf"><span class="file-ico">📄</span><span class="file-name">景粼原著半年报</span></div>
+          <div class="file-node" data-file="特色中医门诊品牌建设" data-tag="综合业务策划" data-desc="把一个尚未充分开发的业务空白，重新梳理成包含定位、服务、运营与推广路径的完整项目" data-pdf="uploads/pdfs/策划与推广/特色中医门诊·品牌建设.pdf"><span class="file-ico">📄</span><span class="file-name">特色中医门诊品牌建设</span></div>
+          <div class="file-node" data-file="康养病区模式推广思路" data-tag="产品 / 商业反思" data-desc="从“家庭减负”的用户价值出发建立推广逻辑，并进一步追问产品价值如何真正转化为商业价值" data-pdf="uploads/pdfs/策划与推广/20250306康养病区模式推广思路.pdf"><span class="file-ico">📄</span><span class="file-name">康养病区模式推广思路</span></div>
+          <div class="file-node" data-file="合作医院品牌提案" data-tag="对象理解 / 价值提炼" data-desc="梳理医院既有资源与专业优势，提炼差异化价值，并转化为品牌定位与传播方向" data-pdf="uploads/pdfs/策划与推广/合作医院品牌提案.pdf"><span class="file-ico">📄</span><span class="file-name">合作医院品牌提案</span></div>
+          <div class="file-node" data-file="泰和康复&金牌橱柜合作构想" data-tag="跨对象价值重组" data-desc="重新理解两个品牌的价值，寻找双方可以共同解决的需求与合作场景" data-pdf="uploads/pdfs/策划与推广/泰和康复&amp;金牌橱柜-合作构想.pdf"><span class="file-ico">📄</span><span class="file-name">泰和康复&金牌橱柜合作构想</span></div>
+          <div class="file-node" data-file="猛虎召集令" data-tag="组织与机制设计" data-desc="把一次内部品牌活动设计成持续的共创机制，让员工从内容接受者变成品牌参与者与内容生产者" data-pdf="uploads/pdfs/策划与推广/猛虎召集令详细机制及投递范例.pdf"><span class="file-ico">📄</span><span class="file-name">猛虎召集令</span></div>
+          <div class="file-node" data-file="品牌年度述职与规划" data-tag="品牌管理 / 年度复盘与规划" data-desc="从年度总结中重新判断品牌处境，并进一步把品牌、人文、策略、项目与创意组织成下一阶段的工作体系" data-pdf="uploads/pdfs/策划与推广/2023年工作总结及2024年工作计划-品牌部.pdf"><span class="file-ico">📄</span><span class="file-name">品牌年度述职与规划</span></div>
+          <div class="file-node" data-file="医院品牌推广与造势" data-tag="品牌推广 / 整合传播" data-pdf="uploads/pdfs/策划与推广/医院品牌推广与造势.pdf"><span class="file-ico">📄</span><span class="file-name">医院品牌推广与造势</span></div>
+          <div class="file-node" data-file="母亲节活动推广初案" data-tag="节点洞察 / 活动策划" data-pdf="uploads/pdfs/策划与推广/母亲节活动推广初案.pdf"><span class="file-ico">📄</span><span class="file-name">母亲节活动推广初案</span></div>
+          <div class="file-node" data-file="月推广工作铺排" data-tag="项目管理 / 推广执行" data-pdf="uploads/pdfs/策划与推广/月推广工作铺排.pdf"><span class="file-ico">📄</span><span class="file-name">月推广工作铺排</span></div>
+        </div>
+      </div>
+    </div>
+
+    <span class="board-hint">"点击文件，一起碰撞火花"</span>
   </div>
 </section>
 
@@ -1101,9 +1677,9 @@
   <div class="container" style="position:relative;z-index:1;">
     <div class="section-header reveal">
     <div class="section-header reveal" style="position:relative;">
-      <span class="section-subtitle">IP Portfolio</span>
-      <span class="section-number" style="position:relative;z-index:1;">02</span>
-      <h2 class="section-title" style="position:relative;z-index:1;">IP 内容</h2>
+      <span class="section-subtitle">Signature IP</span>
+      <span class="section-number" style="position:relative;z-index:1;">03</span>
+      <h2 class="section-title" style="position:relative;z-index:1;">代表IP</h2>
     </div>
 
     <div class="ip-split">
@@ -1160,6 +1736,20 @@
           </div>
         </div>
 
+        <p class="ip-convert reveal reveal-d3">
+          <span class="ip-convert-label">同期科室实际患者量同比</span>
+          <span class="ip-convert-num">增长超 1 倍
+            <svg class="ip-arrow" viewBox="0 0 130 30" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <marker id="ipArrowHead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF8A3D"/>
+                </marker>
+              </defs>
+              <path class="ip-arrow-line" pathLength="100" d="M 3 25 C 45 34 88 16 124 7" fill="none" stroke="#FF8A3D" stroke-width="2.6" stroke-linecap="round" marker-end="url(#ipArrowHead)"/>
+            </svg>
+          </span>
+        </p>
+
         <div class="ip-data-tags">
           <span>健康IP矩阵</span>
           <span>人文记录</span>
@@ -1178,9 +1768,9 @@
   <div class="container">
     <div class="section-header reveal">
     <div class="section-header reveal" style="position:relative;">
-      <span class="section-subtitle">Selected Works</span>
-      <span class="section-number" style="position:relative;z-index:1;">03</span>
-      <h2 class="section-title" style="position:relative;z-index:1;">作品精选</h2>
+      <span class="section-subtitle">Audio & Visual</span>
+      <span class="section-number" style="position:relative;z-index:1;">04</span>
+      <h2 class="section-title" style="position:relative;z-index:1;">视听精选</h2>
     </div>
     <div class="works-strip reveal">
       <div class="works-strip-label"><span>🎬</span> 品牌人文丨记录与叙事</div>
@@ -1188,28 +1778,6 @@
       <div class="works-scroll-hint">鼠标滑动查看更多</div>
     </div>
 
-    <!-- 图片：堆叠卡片 + 文案 -->
-    <div class="works-photo-split reveal reveal-d1">
-      <div class="works-strip-label"><span>📷</span> 视觉与调性</div>
-      <div class="photo-split-inner">
-        <div class="photo-stack-col">
-          <div class="stack-container" id="photoStack"></div>
-          <p class="stack-hint">点击卡片翻到下一张</p>
-        </div>
-        <div class="photo-text-col">
-          <h3>品牌体系，从有立意的视觉开始</h3>
-          <p>主导品牌视觉识别系统与创意表达，统筹品牌形象系列与学科特色主题设计，在统一调性下适配不同传播场景与特性。</p>
-          <div class="photo-text-tags">
-            <span>符号</span>
-            <span>象征</span>
-            <span>标准</span>
-            <span>立意</span>
-            <span>叙事</span>
-            <span>延展</span>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1257,6 +1825,8 @@
   <p>© 2026 · Powered by <a href="https://github.com/esthersjw/esther-design-system" target="_blank" rel="noopener">Esther DS</a></p>
 </footer>
 
+<script src="jszip.min.js"></script>
+<script src="lib/pdf.min.js"></script>
 <script>
   // ＝= 作品数据 —— 从 API 拉取 ===
   function renderCard(w) {
@@ -1371,7 +1941,7 @@
   }
 
   // 作品数据内嵌（本地+线上均可用）
-  var WORKS_DATA = [{"id":4,"type":"video","title":"产品短片 · 质感","desc":"用镜头语言诠释产品细节与品牌美学。","gradient":"linear-gradient(135deg, #c0b8c8 0%, #8a7a98 40%, #6a5a78 100%)","icon":"✨","cover":"uploads/images/1784713068269-pew212.jpg","link":"https://weixin.qq.com/sph/AxdAUhp54"},{"id":6,"type":"video","title":"活动记录 · 品牌日","desc":"品牌线下活动全流程记录与精彩集锦。","gradient":"linear-gradient(135deg, #b8d0c8 0%, #78a895 40%, #588878 100%)","icon":"📸","cover":"uploads/images/1784713424374-iacb9q.jpg","link":"https://weixin.qq.com/sph/AQd1iVAax"},{"id":5,"type":"video","title":"人物访谈 · 医者","desc":"对话医疗从业者，记录真实故事与专业精神。","gradient":"linear-gradient(135deg, #d0c8b8 0%, #a89578 40%, #887560 100%)","icon":"🎙️","cover":"uploads/images/1784713399971-y25rnj.jpg","link":"https://weixin.qq.com/sph/AP1d0E6Ov"},{"id":1,"type":"video","title":"品牌故事 · 手艺人","desc":"记录三位手艺人的日常，讲述慢的价值。","gradient":"linear-gradient(135deg, #b8c5d0 0%, #7a95a8 40%, #5a7888 100%)","icon":"🎬","cover":"uploads/images/1784711657661-f68sc9.jpg","link":"https://weixin.qq.com/sph/AZ1XdqtGw"},{"id":2,"type":"video","title":"节气短片 · 夏至","desc":"二十四节气系列，传统文化融入当代影像。","gradient":"linear-gradient(135deg, #c8d8c0 0%, #9ab88a 40%, #7a9a60 100%)","icon":"🍃","cover":"uploads/images/1784713031596-skxl51.jpg","link":"https://weixin.qq.com/sph/A2mJgXlq9"},{"id":3,"type":"video","title":"探店Vlog · 城市角落","desc":"探索城市里被忽略的有趣空间与故事。","gradient":"linear-gradient(135deg, #d5c8c0 0%, #b09585 40%, #907560 100%)","icon":"📍","cover":"uploads/images/1784713039122-yhl1n9.jpg","link":"https://weixin.qq.com/sph/Aj43H8TVr"},{"id":7,"type":"image","title":"微信图片_20260722163559_167_7","desc":"","gradient":"","icon":"","filename":"uploads/images/1784709534797-ioijpd.jpg"},{"id":8,"type":"image","title":"微信图片_20260722154920_157_7","desc":"","gradient":"","icon":"","filename":"uploads/images/1784709541446-w84uga.jpg"},{"id":9,"type":"image","title":"微信图片_20260722154943_158_7","desc":"","gradient":"","icon":"","filename":"uploads/images/1784709547053-bs7sxf.jpg"},{"id":10,"type":"image","title":"微信图片_20260722154811_153_7","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710531662-nj1w43.jpg"},{"id":11,"type":"image","title":"微信图片_20260722154820_154_7","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710531679-6h5b3m.jpg"},{"id":12,"type":"image","title":"微信图片_20260722154840_155_7","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710531699-5n4e19.jpg"},{"id":13,"type":"image","title":"微信图片_20260722155001_159_7","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710540550-7g4z6n.jpg"},{"id":14,"type":"image","title":"微信图片_20260722155010_160_7","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710540570-cqp459.jpg"},{"id":15,"type":"image","title":"微信图片_20260722155018_161_7","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710540589-st2ynr.jpg"},{"id":16,"type":"image","title":"微信图片_20260722163546_166_7","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710546816-7ccnqj.jpg"},{"id":17,"type":"image","title":"微信图片_20260722155146_165_7","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710559002-9ny5r5.jpg"},{"id":18,"type":"image","title":"微信图片_20260722155036_162_7","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710806451-1iya45.jpg"},{"id":19,"type":"image","title":"微信图片_20260722155117_163_7","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710806472-zvus1e.jpg"},{"id":20,"type":"image","title":"微信图片_20260722155130_164_7","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710806491-4935yg.jpg"},{"id":21,"type":"image","title":"图片3","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710869224-0uv7a5.jpg"},{"id":22,"type":"image","title":"11","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710886724-fttprn.jpg"},{"id":23,"type":"image","title":"22","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710886746-7xycnd.jpg"},{"id":24,"type":"image","title":"33","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710886763-888eav.jpg"},{"id":25,"type":"image","title":"图片2","desc":"","gradient":"","icon":"","filename":"uploads/images/1784710886783-yrplnj.jpg"}];
+  var WORKS_DATA = [{"id":4,"type":"video","title":"产品短片 · 质感","desc":"用镜头语言诠释产品细节与品牌美学。","gradient":"linear-gradient(135deg, #c0b8c8 0%, #8a7a98 40%, #6a5a78 100%)","icon":"✨","cover":"uploads/images/1784713068269-pew212.jpg","link":"https://weixin.qq.com/sph/AxdAUhp54"},{"id":6,"type":"video","title":"活动记录 · 品牌日","desc":"品牌线下活动全流程记录与精彩集锦。","gradient":"linear-gradient(135deg, #b8d0c8 0%, #78a895 40%, #588878 100%)","icon":"📸","cover":"uploads/images/1784713424374-iacb9q.jpg","link":"https://weixin.qq.com/sph/AQd1iVAax"},{"id":5,"type":"video","title":"人物访谈 · 医者","desc":"对话医疗从业者，记录真实故事与专业精神。","gradient":"linear-gradient(135deg, #d0c8b8 0%, #a89578 40%, #887560 100%)","icon":"🎙️","cover":"uploads/images/1784713399971-y25rnj.jpg","link":"https://weixin.qq.com/sph/AP1d0E6Ov"},{"id":1,"type":"video","title":"品牌故事 · 手艺人","desc":"记录三位手艺人的日常，讲述慢的价值。","gradient":"linear-gradient(135deg, #b8c5d0 0%, #7a95a8 40%, #5a7888 100%)","icon":"🎬","cover":"uploads/images/1784711657661-f68sc9.jpg","link":"https://weixin.qq.com/sph/AZ1XdqtGw"},{"id":2,"type":"video","title":"节气短片 · 夏至","desc":"二十四节气系列，传统文化融入当代影像。","gradient":"linear-gradient(135deg, #c8d8c0 0%, #9ab88a 40%, #7a9a60 100%)","icon":"🍃","cover":"uploads/images/1784713031596-skxl51.jpg","link":"https://weixin.qq.com/sph/A2mJgXlq9"},{"id":3,"type":"video","title":"探店Vlog · 城市角落","desc":"探索城市里被忽略的有趣空间与故事。","gradient":"linear-gradient(135deg, #d5c8c0 0%, #b09585 40%, #907560 100%)","icon":"📍","cover":"uploads/images/1784713039122-yhl1n9.jpg","link":"https://weixin.qq.com/sph/Aj43H8TVr"}];
   renderStrips(WORKS_DATA);
 
   // 窗口缩放时更新堆叠卡片尺寸
@@ -1418,7 +1988,7 @@
 
   // === #47 Typing Animation ===
   (function() {
-    const sentence = '内容，不在于说了多少，而在于理解了多少。';
+    const sentence = '品牌，不在于说了多少，而在于理解了多少。';
     const chars = Array.from(sentence);
     const el = document.getElementById('typingText');
     const descEl = document.getElementById('typingDesc');
@@ -1455,6 +2025,496 @@
   })();
 
 
+  // === 文策展示：文件夹看板（可拖拽） ===
+  (function() {
+    const board = document.getElementById('folderBoard');
+    if (!board) return;
+
+    // 1. 项目文件夹拖拽（顶层 folder-node 作为手柄，mouse 事件）
+    board.querySelectorAll('.proj-folder').forEach(function(pf) {
+      const node = pf.querySelector('.folder-node');
+      if (!node) return;
+      let dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
+      node.addEventListener('mousedown', function(e) {
+        if (e.button !== 0) return;
+        sx = e.clientX; sy = e.clientY;
+        ox = pf.offsetLeft; oy = pf.offsetTop;
+        function onMove(ev) {
+          const dx = ev.clientX - sx, dy = ev.clientY - sy;
+          if (!dragging && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+            dragging = true;
+            pf.classList.add('dragging');
+          }
+          if (dragging) {
+            pf.style.left = (ox + dx) + 'px';
+            pf.style.top = (oy + dy) + 'px';
+          }
+        }
+        function onUp() {
+          pf.classList.remove('dragging');
+          document.removeEventListener('mousemove', onMove);
+          document.removeEventListener('mouseup', onUp);
+          setTimeout(function() { dragging = false; }, 0);
+        }
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+      });
+      node.addEventListener('click', function(e) {
+        if (dragging) { e.preventDefault(); e.stopPropagation(); dragging = false; }
+      });
+    });
+
+    // 2. 文件夹展开 / 收起（委托）+ 点击空白收起
+    board.addEventListener('click', function(e) {
+      const node = e.target.closest('[data-toggle]');
+      if (node) {
+        const isSub = node.parentElement.classList.contains('sub-folder');
+        const isDrawer = node.hasAttribute('data-drawer');
+        if (isSub || isDrawer) {
+          // 子文件夹 / 直弹侧栏的文件夹：弹出文件抽屉
+          openDrawer(node.parentElement, node);
+          e.stopPropagation();
+        } else {
+          node.classList.toggle('open');
+          node.parentElement.classList.toggle('open');
+        }
+      } else if (!e.target.closest('.file-node')) {
+        board.querySelectorAll('.proj-folder.open').forEach(function(f) {
+          f.classList.remove('open');
+          const n = f.querySelector(':scope > .folder-node');
+          if (n) n.classList.remove('open');
+        });
+      }
+    });
+
+    // ===== PDF 交互注解系统（PDF.js 渲染 + 热点气泡）=====
+    // 注解配置：key 为文件名（data-file）；页码为字符串；x/y 为页面宽高百分比 0-100
+    // 正式注解写在这里（由「注解编辑模式」导出后填入）
+    const PDF_ANNO = {
+      '品牌部年度推广案': {
+        // '3': [ { x: 50, y: 20, text: '示例注解文案' } ],
+      }
+    };
+    // 编辑模式草稿存 localStorage，键 pdfAnnoDraft
+    function getAnnoDraft() {
+      try { return JSON.parse(localStorage.getItem('pdfAnnoDraft') || '{}'); } catch (e) { return {}; }
+    }
+    function saveAnnoDraft(d) { localStorage.setItem('pdfAnnoDraft', JSON.stringify(d)); }
+
+    let pdfjsTask = null; // 当前 PDF 加载任务，切换文件时销毁
+    function renderPdfWithAnno(src, fname, edit) {
+      // PDF.js 不可用时退回 iframe 预览
+      if (typeof pdfjsLib === 'undefined') {
+        mPdf.innerHTML = '<iframe src="' + encodeURI(src) + '" title="PDF 预览"></iframe>';
+        return;
+      }
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'lib/pdf.worker.min.js';
+      if (pdfjsTask) { try { pdfjsTask.destroy(); } catch (e) {} pdfjsTask = null; }
+
+      mPdf.innerHTML =
+        '<div class="pdfjs-wrap">' +
+          '<div class="pdfjs-bar">' +
+            '<button class="pg-prev">‹ 上一页</button>' +
+            '<span class="pg-info">加载中…</span>' +
+            '<button class="pg-next">下一页 ›</button>' +
+          '</div>' +
+          '<div class="pdfjs-stage' + (edit ? ' editing' : '') + '"><canvas></canvas><div class="pdf-anno-layer"></div></div>' +
+          (edit ? '<div class="pdf-edit-bar"><b>注解编辑模式</b>：点页面任意位置加注解，点 teal 圆点删除该条。' +
+            '<button class="anno-export">复制配置发给我</button>' +
+            '<button class="anno-clear warn">清空本文件草稿</button></div>' : '') +
+        '</div>';
+
+      const stage = mPdf.querySelector('.pdfjs-stage');
+      const layer = mPdf.querySelector('.pdf-anno-layer');
+      const info = mPdf.querySelector('.pg-info');
+      const canvas = mPdf.querySelector('canvas');
+      const ctx = canvas.getContext('2d');
+
+      // 正式配置与草稿合并（草稿优先，方便编辑后即时预览）
+      function annoConfig() {
+        return Object.assign({}, PDF_ANNO[fname] || {}, getAnnoDraft()[fname] || {});
+      }
+
+      pdfjsTask = pdfjsLib.getDocument(encodeURI(src));
+      pdfjsTask.promise.then(function(pdf) {
+        let cur = 1;
+        let renderTask = null; // 防止快速翻页时两个渲染任务抢同一 canvas
+
+        function drawAnnos() {
+          layer.innerHTML = '';
+          const items = annoConfig()[String(cur)] || [];
+          items.forEach(function(a) {
+            const dot = document.createElement('div');
+            dot.className = 'pdf-anno-dot' + (a.y < 28 ? ' tip-below' : '');
+            dot.style.left = a.x + '%';
+            dot.style.top = a.y + '%';
+            dot.tabIndex = 0; // 支持 Tab 聚焦显示气泡
+            const tip = document.createElement('div');
+            tip.className = 'pdf-anno-tip';
+            tip.textContent = a.text;
+            dot.appendChild(tip);
+            if (edit) {
+              dot.addEventListener('click', function(ev) {
+                ev.stopPropagation();
+                if (!confirm('删除这条注解？\n「' + a.text + '」')) return;
+                const d = getAnnoDraft();
+                const arr = (d[fname] || {})[String(cur)] || [];
+                const i = arr.findIndex(function(t) { return t.x === a.x && t.y === a.y && t.text === a.text; });
+                if (i > -1) { arr.splice(i, 1); saveAnnoDraft(d); drawAnnos(); }
+                else { alert('这条属于正式配置（已写入代码），需在代码里删除。'); }
+              });
+            }
+            layer.appendChild(dot);
+          });
+        }
+
+        function renderPage(n) {
+          if (n < 1 || n > pdf.numPages) return;
+          cur = n;
+          pdf.getPage(n).then(function(page) {
+            const w = stage.clientWidth || 800;
+            const base = page.getViewport({ scale: 1 });
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const vp = page.getViewport({ scale: (w / base.width) * dpr });
+            canvas.width = vp.width;
+            canvas.height = vp.height;
+            if (renderTask) { try { renderTask.cancel(); } catch (e) {} }
+            renderTask = page.render({ canvasContext: ctx, viewport: vp });
+            info.textContent = n + ' / ' + pdf.numPages;
+            mPdf.querySelector('.pg-prev').disabled = (n === 1);
+            mPdf.querySelector('.pg-next').disabled = (n === pdf.numPages);
+            drawAnnos();
+          });
+        }
+
+        mPdf.querySelector('.pg-prev').addEventListener('click', function() { renderPage(cur - 1); });
+        mPdf.querySelector('.pg-next').addEventListener('click', function() { renderPage(cur + 1); });
+
+        // 编辑模式：点空白处添加注解
+        if (edit) {
+          stage.addEventListener('click', function(e) {
+            if (e.target.closest('.pdf-anno-dot')) return; // 圆点自己处理删除
+            const r = stage.getBoundingClientRect();
+            const x = +((e.clientX - r.left) / r.width * 100).toFixed(1);
+            const y = +((e.clientY - r.top) / r.height * 100).toFixed(1);
+            const text = prompt('第 ' + cur + ' 页 · 位置 (' + x + '%, ' + y + '%)\n输入这条注解的文案：');
+            if (!text || !text.trim()) return;
+            const d = getAnnoDraft();
+            d[fname] = d[fname] || {};
+            d[fname][String(cur)] = d[fname][String(cur)] || [];
+            d[fname][String(cur)].push({ x: x, y: y, text: text.trim() });
+            saveAnnoDraft(d);
+            drawAnnos();
+          });
+          // 导出草稿配置（复制后发给 Claude，写入 PDF_ANNO 成为正式版）
+          mPdf.querySelector('.anno-export').addEventListener('click', function() {
+            const d = getAnnoDraft()[fname];
+            if (!d || !Object.keys(d).length) { alert('还没有添加任何注解。'); return; }
+            const json = ' \'' + fname + '\': ' + JSON.stringify(d, null, 2).replace(/\n/g, '\n  ') + ',';
+            const done = function() { alert('已复制！回到 Claude 对话里直接粘贴（Ctrl+V）发给我就行。'); };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(json).then(done, function() { prompt('自动复制失败，请手动全选复制：', json); });
+            } else {
+              prompt('请手动全选复制：', json);
+            }
+          });
+          // 清空本文件草稿
+          mPdf.querySelector('.anno-clear').addEventListener('click', function() {
+            if (!confirm('清空「' + fname + '」的全部注解草稿？（不影响已写入代码的正式注解）')) return;
+            const d = getAnnoDraft();
+            delete d[fname];
+            saveAnnoDraft(d);
+            drawAnnos();
+          });
+        }
+
+        renderPage(1);
+      }).catch(function(err) {
+        info.textContent = '加载失败';
+        console.error('PDF.js 加载失败：', err);
+      });
+    }
+
+    // 文件详情模态框
+    const modal = document.createElement('div');
+    modal.className = 'file-modal';
+    modal.innerHTML = '<div class="file-modal-card">' +
+      '<button class="file-modal-close" aria-label="关闭">✕</button>' +
+      '<span class="file-modal-ico"></span>' +
+      '<h3 class="file-modal-title"></h3>' +
+      '<p class="file-modal-body"></p>' +
+      '<div class="file-modal-pdf"></div></div>';
+    document.body.appendChild(modal);
+    const mIco = modal.querySelector('.file-modal-ico');
+    const mTitle = modal.querySelector('.file-modal-title');
+    const mBody = modal.querySelector('.file-modal-body');
+    const mPdf = modal.querySelector('.file-modal-pdf');
+    const mCard = modal.querySelector('.file-modal-card');
+    function closeModal() { modal.classList.remove('show'); }
+    modal.querySelector('.file-modal-close').addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+
+    document.addEventListener('click', function(e) {
+      const file = e.target.closest('.file-node');
+      if (!file) return;
+      closeDrawer();
+      const src = file.dataset.pdf;
+      mTitle.textContent = file.dataset.file || '';
+      if (src) {
+        mIco.style.display = 'none';
+        mBody.style.display = 'none';
+        const isImg = /\.(jpe?g|png|gif|webp|bmp|svg)(\?|$)/i.test(src);
+        if (isImg) {
+          mPdf.innerHTML = '<img src="' + encodeURI(src) + '" alt="' + (file.dataset.file || '') + '" loading="lazy">';
+          mCard.classList.remove('has-pdf');
+          mCard.classList.remove('has-anno');
+          mCard.classList.add('has-image');
+        } else {
+          // 交互注解：文件配置过注解，或 URL 带 ?anno=文件名（编辑模式）时，用 PDF.js 渲染
+          const fName = file.dataset.file || '';
+          const annoParam = new URLSearchParams(location.search).get('anno');
+          const editThis = !!(annoParam && annoParam === fName);
+          const conf = PDF_ANNO[fName] || getAnnoDraft()[fName];
+          const hasAnno = !!(conf && Object.keys(conf).length);
+          if (editThis || hasAnno) {
+            mCard.classList.add('has-anno');
+            mCard.classList.remove('has-image');
+            renderPdfWithAnno(src, fName, editThis);
+          } else {
+            mPdf.innerHTML = '<iframe src="' + encodeURI(src) + '" title="PDF 预览"></iframe>';
+            mCard.classList.add('has-pdf');
+            mCard.classList.remove('has-image');
+            mCard.classList.remove('has-anno');
+          }
+        }
+        mPdf.style.display = 'block';
+      } else {
+        mIco.style.display = '';
+        mBody.style.display = '';
+        mIco.textContent = file.querySelector('.file-ico').textContent;
+        mBody.textContent = file.dataset.desc || '（内容待补充）';
+        mPdf.innerHTML = '';
+        mPdf.style.display = 'none';
+        mCard.classList.remove('has-pdf');
+        mCard.classList.remove('has-image');
+      }
+      modal.classList.add('show');
+    });
+
+    // 5. 文件夹打包下载（zip，保留子文件夹层级）
+    (function() {
+      if (typeof JSZip === 'undefined') return;
+      function collectFiles(container) {
+        const out = [];
+        (function walk(el, prefix) {
+          Array.from(el.children).forEach(function(child) {
+            if (child.classList.contains('file-node') && child.dataset.pdf) {
+              var _url = child.dataset.pdf;
+              var _ext = (_url.match(/\.([^./\\]+)$/) || [])[1];
+              out.push({ url: _url, path: prefix + (child.dataset.file || '未命名') + (_ext ? '.' + _ext : '') });
+            } else if (child.classList.contains('sub-folder')) {
+              const nameEl = child.querySelector(':scope > .folder-node .folder-name');
+              const name = nameEl ? nameEl.textContent.trim() : '子文件夹';
+              const fc = child.querySelector(':scope > .folder-children');
+              if (fc) walk(fc, prefix + name + '/');
+            } else {
+              walk(child, prefix);
+            }
+          });
+        })(container, '');
+        return out;
+      }
+      board.querySelectorAll('.folder-dl').forEach(function(btn) {
+        btn.addEventListener('mousedown', function(e) { e.stopPropagation(); });
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          const node = btn.closest('.folder-node');
+          const container = node.parentElement;
+          const files = collectFiles(container);
+          if (!files.length) return;
+          const zipName = btn.dataset.zip || '文件夹';
+          const zip = new JSZip();
+          const folder = zip.folder(zipName);
+          const old = btn.textContent;
+          btn.textContent = '…';
+          Promise.all(files.map(function(f) {
+            return fetch(encodeURI(f.url)).then(function(r) {
+              if (!r.ok) throw new Error('fail');
+              return r.blob();
+            }).then(function(blob) { return { path: f.path, blob: blob }; })
+              .catch(function() { return null; });
+          })).then(function(results) {
+            results.filter(Boolean).forEach(function(r) { folder.file(r.path, r.blob); });
+            return zip.generateAsync({ type: 'blob' });
+          }).then(function(blob) {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = zipName + '.zip';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(function() { URL.revokeObjectURL(a.href); }, 2000);
+            btn.textContent = old;
+          }).catch(function() {
+            btn.textContent = old;
+          });
+        });
+      });
+    })();
+
+    // 6. 文件浮层抽屉（突破桌面边界）
+    const drawer = document.createElement('div');
+    drawer.className = 'file-drawer';
+    document.body.appendChild(drawer);
+    let drawerFolder = null;
+    const drawerTheme = { teal: '#22eedd', warm: '#E8A87C', green: '#6A9A50', purple: '#A78BFA' };
+
+    function openDrawer(subFolder, folderNode) {
+      drawerFolder = subFolder;
+      const title = folderNode.querySelector('.folder-name').textContent.trim();
+      const filesHTML = Array.from(subFolder.querySelectorAll('.file-node')).map(function(f) { return f.outerHTML; }).join('');
+      const pf = subFolder.closest('.proj-folder');
+      drawer.style.setProperty('--theme', pf ? (drawerTheme[pf.dataset.theme] || '#22eedd') : '#22eedd');
+      drawer.innerHTML =
+        '<div class="file-drawer-head">' +
+          '<span class="file-drawer-title">' + title + '</span>' +
+          '<button class="file-drawer-dl">⬇ 下载</button>' +
+          '<button class="file-drawer-close">✕</button>' +
+        '</div>' +
+        '<div class="file-drawer-list">' + filesHTML + '</div>';
+      // 抽屉里的文件是克隆节点，重新绑定 hover 标签/说明卡片（pf 提供主题色）
+      if (window.bindFileHover) {
+        drawer.querySelectorAll('.file-node').forEach(function(f) { window.bindFileHover(f, pf); });
+      }
+      // 智能定位：像右键菜单，贴在文件夹旁，优先下方，放不下翻上方，收进屏幕内
+      const rect = folderNode.getBoundingClientRect();
+      const dw = drawer.offsetWidth;
+      const dh = drawer.offsetHeight;
+      let left = rect.left;
+      if (left + dw > window.innerWidth - 12) left = window.innerWidth - dw - 12;
+      left = Math.max(12, left);
+      let top = rect.bottom + 6;
+      if (top + dh > window.innerHeight - 12) top = rect.top - 6 - dh;
+      top = Math.max(12, top);
+      drawer.style.left = left + 'px';
+      drawer.style.top = top + 'px';
+      drawer.classList.add('show');
+      drawer.querySelector('.file-drawer-close').onclick = closeDrawer;
+      drawer.querySelector('.file-drawer-dl').onclick = function() {
+        const dl = drawerFolder.querySelector('.folder-dl');
+        if (dl) dl.click();
+      };
+    }
+    function closeDrawer() { drawer.classList.remove('show'); }
+    document.addEventListener('click', function(e) {
+      if (drawer.classList.contains('show') && !drawer.contains(e.target) && !e.target.closest('.folder-dl')) {
+        closeDrawer();
+      }
+    });
+
+    // 4. hover 卡片（项目分类说明 / 文件背景角色结果）
+    const tip = document.createElement('div');
+    tip.className = 'proj-tooltip';
+    document.body.appendChild(tip);
+    const themeMap = { teal: '#22eedd', warm: '#E8A87C', green: '#6A9A50', purple: '#A78BFA' };
+    function positionTip(e) {
+      const pad = 16;
+      let x = e.clientX + pad, y = e.clientY + pad;
+      const r = tip.getBoundingClientRect();
+      if (x + r.width > window.innerWidth - 12) x = e.clientX - r.width - pad;
+      if (y + r.height > window.innerHeight - 12) y = e.clientY - r.height - pad;
+      tip.style.left = x + 'px';
+      tip.style.top = y + 'px';
+    }
+    function setTipColor(pf) {
+      const c = pf ? (themeMap[pf.dataset.theme] || '#22eedd') : '#22eedd';
+      tip.style.setProperty('--theme', c); // 标签徽章等新元素用 CSS 变量取主题色
+      tip.querySelectorAll('.pt-label').forEach(function(l) { l.style.color = c; });
+    }
+    // 把「 · 」分隔的文本拆成不可断行的词组单元，保证换行时词组完整
+    // 文案中可用「|」手动指定换行点（换行处不显示分隔符）
+    // 说明（长句）不走此逻辑，按卡片宽度自然断行
+    function segNote(text) {
+      const s = String(text || '');
+      // 含「 · 」或「|」→ 关键词串按词组断行（词组不拆）；否则 → 说明句自然换行
+      if (s.indexOf(' · ') === -1 && s.indexOf('|') === -1) return s;
+      return s.split('|').map(function(line) {
+        return line.trim().split(' · ').map(function(seg) {
+          return '<span class="pt-seg">' + seg + '</span>';
+        }).join(' · ');
+      }).join('<br>');
+    }
+
+    // 项目文件夹 hover：分类说明 / 板块三要素
+    board.querySelectorAll(':scope > .proj-folder').forEach(function(pf) {
+      const node = pf.querySelector(':scope > .folder-node');
+      node.addEventListener('mouseenter', function(e) {
+        if (node.dataset.bg || node.dataset.role || node.dataset.result) {
+          tip.innerHTML = '<div class="pt-row"><span class="pt-label">背景</span><span class="pt-text">' + (node.dataset.bg || '') + '</span></div>' +
+            '<div class="pt-row"><span class="pt-label">角色</span><span class="pt-text">' + (node.dataset.role || '') + '</span></div>' +
+            '<div class="pt-row"><span class="pt-label">结果</span><span class="pt-text">' + (node.dataset.result || '') + '</span></div>';
+        } else {
+          tip.innerHTML = '<div class="pt-row"><span class="pt-label">分类</span><span class="pt-text">' + segNote(node.dataset.note) + '</span></div>';
+        }
+        setTipColor(pf);
+        tip.classList.add('show');
+        positionTip(e);
+      });
+      node.addEventListener('mousemove', positionTip);
+      node.addEventListener('mouseleave', function() { tip.classList.remove('show'); });
+    });
+
+    // 板块子文件夹 hover：背景 / 角色 / 结果
+    board.querySelectorAll('.sub-folder > .folder-node').forEach(function(node) {
+      node.addEventListener('mouseenter', function(e) {
+        if (node.dataset.note) {
+          tip.innerHTML = '<div class="pt-row"><span class="pt-label">分类</span><span class="pt-text">' + segNote(node.dataset.note) + '</span></div>';
+        } else if (node.dataset.bg || node.dataset.role || node.dataset.result) {
+          tip.innerHTML = '<div class="pt-row"><span class="pt-label">背景</span><span class="pt-text">' + (node.dataset.bg || '') + '</span></div>' +
+            '<div class="pt-row"><span class="pt-label">角色</span><span class="pt-text">' + (node.dataset.role || '') + '</span></div>' +
+            '<div class="pt-row"><span class="pt-label">结果</span><span class="pt-text">' + (node.dataset.result || '') + '</span></div>';
+        } else {
+          tip.innerHTML = '<div class="pt-row"><span class="pt-label">板块</span><span class="pt-text">' + (node.querySelector('.folder-name').textContent.trim() || '') + '</span></div>';
+        }
+        setTipColor(node.closest('.proj-folder'));
+        tip.classList.add('show');
+        positionTip(e);
+      });
+      node.addEventListener('mousemove', positionTip);
+      node.addEventListener('mouseleave', function() { tip.classList.remove('show'); });
+    });
+
+    // 子文件 hover：标签徽章 + 说明（data-tag / data-desc）｜背景 / 角色 / 结果
+    // 抽成通用函数：看板文件 + 侧边抽屉里的克隆文件都要绑定（folderEl 供抽屉文件取主题色）
+    function bindFileHover(file, folderEl) {
+      file.addEventListener('mouseenter', function(e) {
+        if (file.dataset.tag) {
+          // 新格式：标签 chips + 说明段落
+          const chips = String(file.dataset.tag).split(' · ').filter(function(t) { return t.trim(); }).map(function(t) {
+            return '<span class="pt-chip">' + t.trim() + '</span>';
+          }).join('');
+          tip.innerHTML =
+            (chips ? '<div class="pt-tags">' + chips + '</div>' : '') +
+            (file.dataset.desc ? '<div class="pt-row"><span class="pt-label">说明</span><span class="pt-text">' + (file.dataset.desc || '') + '</span></div>' : '');
+        } else if (file.dataset.bg || file.dataset.role || file.dataset.result) {
+          tip.innerHTML = '<div class="pt-row"><span class="pt-label">背景</span><span class="pt-text">' + (file.dataset.bg || '') + '</span></div>' +
+            '<div class="pt-row"><span class="pt-label">角色</span><span class="pt-text">' + (file.dataset.role || '') + '</span></div>' +
+            '<div class="pt-row"><span class="pt-label">结果</span><span class="pt-text">' + (file.dataset.result || '') + '</span></div>';
+        } else {
+          tip.innerHTML = '<div class="pt-row"><span class="pt-label">简介</span><span class="pt-text">' + (file.dataset.desc || file.dataset.file || '') + '</span></div>';
+        }
+        setTipColor(file.closest('.proj-folder') || folderEl);
+        tip.classList.add('show');
+        positionTip(e);
+      });
+      file.addEventListener('mousemove', positionTip);
+      file.addEventListener('mouseleave', function() { tip.classList.remove('show'); });
+    }
+    board.querySelectorAll('.file-node').forEach(function(file) { bindFileHover(file); });
+    window.bindFileHover = bindFileHover; // 暴露给文件抽屉使用
+  })();
+
   // === 终端打字模拟 ===
   (function() {
     const container = document.getElementById('termContent');
@@ -1465,11 +2525,19 @@
       { type:'cmd', text:'who am i' },
       { type:'out', text:'张燕萍' },
       { type:'blank' },
+      // 【个人核心定位 — 已定稿 2026-09-15】
+      { type:'cmd', text:'cat position.txt' },
+      { type:'out', text:'品牌与创意策划' },
+      { type:'out', text:'10年品牌、内容与整合营销经验' },
+      { type:'blank' },
+      { type:'cmd', text:'cat objects.txt' },
+      { type:'out', text:'地产 · 医疗 · 城市文化 · 人物 · 建筑 · 室内设计 · 托育' },
+      { type:'blank' },
       { type:'cmd', text:'cat role.txt' },
-      { type:'out', text:'内容策略 · 品牌叙事 · 深度对话 · 用户洞察 · 创意落地' },
+      { type:'out', text:'理解品牌与业务 · 梳理问题与价值 · 转化为策略与创意' },
       { type:'blank' },
       { type:'cmd', text:'echo $belief' },
-      { type:'out', text:'"内容，不在于说了多少，而在于理解了多少。"' },
+      { type:'out', text:'"品牌，不在于说了多少，而在于理解了多少。"' },
       { type:'blank' },
       { type:'cmd', text:'open ./contact' },
     ];
@@ -1522,7 +2590,7 @@
     function showOutput() {
       const item = script[step];
       if (item.type === 'blank') {
-        createLine('term-line').innerHTML = '&nbsp;';
+        createLine('term-blank');
         step++;
         typingTimer = setTimeout(processStep, 80);
         return;
@@ -1533,9 +2601,9 @@
         el.appendChild(document.createTextNode('→ '));
         const a1 = document.createElement('a');
         a1.textContent = '浏览作品';
-        a1.href = '#works';
+        a1.href = '#copydeck';
         a1.style.cssText = 'color:#22eedd;cursor:pointer;text-decoration:underline;text-underline-offset:3px;';
-        a1.addEventListener('click', function(e) { e.preventDefault(); const t = document.querySelector('#works'); if(t) t.scrollIntoView({behavior:'smooth',block:'start'}); });
+        a1.addEventListener('click', function(e) { e.preventDefault(); const t = document.querySelector('#copydeck'); if(t) t.scrollIntoView({behavior:'smooth',block:'start'}); });
         el.appendChild(a1);
         el.appendChild(document.createTextNode('  |  → '));
         const a2 = document.createElement('a');

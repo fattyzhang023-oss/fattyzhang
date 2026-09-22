@@ -881,6 +881,14 @@
     .file-modal-close:hover { color: var(--ink); }
     .file-modal-ico { font-size: 2rem; display: block; margin-bottom: 14px; }
     .file-modal-title { font-family: 'Noto Serif SC', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; color: var(--ink); }
+    .file-modal-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    .file-modal-head .file-modal-title { margin-bottom: 0; }
+    .file-modal-dl {
+      flex: none; border: 1px solid rgba(0,0,0,0.14); background: #fff; color: var(--ink);
+      border-radius: 8px; padding: 4px 12px; cursor: pointer; font-size: 0.85rem; white-space: nowrap;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .file-modal-dl:hover { border-color: #22eedd; color: #0a9c90; background: rgba(34,238,221,0.08); }
     .file-modal-body { font-size: 0.9rem; color: var(--ink-light); line-height: 1.8; }
     .file-modal-card.has-pdf { max-width: 900px; }
     .file-modal-card.has-image { max-width: min(92vw, 600px); }
@@ -2252,7 +2260,10 @@
     modal.innerHTML = '<div class="file-modal-card">' +
       '<button class="file-modal-close" aria-label="关闭">✕</button>' +
       '<span class="file-modal-ico"></span>' +
-      '<h3 class="file-modal-title"></h3>' +
+      '<div class="file-modal-head">' +
+        '<h3 class="file-modal-title"></h3>' +
+        '<button class="file-modal-dl" title="下载此文件">⬇ 下载</button>' +
+      '</div>' +
       '<p class="file-modal-body"></p>' +
       '<div class="file-modal-pdf"></div></div>';
     document.body.appendChild(modal);
@@ -2261,8 +2272,23 @@
     const mBody = modal.querySelector('.file-modal-body');
     const mPdf = modal.querySelector('.file-modal-pdf');
     const mCard = modal.querySelector('.file-modal-card');
+    const mDl = modal.querySelector('.file-modal-dl');
     function closeModal() { modal.classList.remove('show'); }
     modal.querySelector('.file-modal-close').addEventListener('click', closeModal);
+
+    // 单个文件下载：点击弹窗里的「下载」按钮，用当前文件路径触发浏览器下载
+    let currentSrc = '';
+    let currentFileName = '';
+    mDl.addEventListener('click', function() {
+      if (!currentSrc) return;
+      const ext = (currentSrc.match(/\.([^./\\]+)$/) || [])[1] || '';
+      const a = document.createElement('a');
+      a.href = currentSrc;
+      a.download = (currentFileName || '文件') + (ext ? '.' + ext : '');
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
     modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
 
     document.addEventListener('click', function(e) {
@@ -2271,6 +2297,9 @@
       closeDrawer();
       const src = file.dataset.pdf;
       mTitle.textContent = file.dataset.file || '';
+      currentSrc = src || '';
+      currentFileName = file.dataset.file || '';
+      mDl.style.display = src ? '' : 'none';
       if (src) {
         mIco.style.display = 'none';
         mBody.style.display = 'none';

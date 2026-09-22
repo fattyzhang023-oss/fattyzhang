@@ -2268,22 +2268,15 @@
           mCard.classList.remove('has-anno');
           mCard.classList.add('has-image');
         } else {
-          // 交互注解：文件配置过注解，或 URL 带 ?anno=文件名（编辑模式）时，用 PDF.js 渲染
+          // 所有 PDF 统一走 PDF.js 渲染（逐页 canvas，跨设备/浏览器稳定，避免 iframe 内嵌在手机/浏览器上乱码）
+          // 注解：仅当配置过注解、或 URL 带 ?anno=文件名（编辑模式）时叠加；否则就是纯预览
           const fName = file.dataset.file || '';
           const annoParam = new URLSearchParams(location.search).get('anno');
           const editThis = !!(annoParam && annoParam === fName);
-          const conf = PDF_ANNO[fName] || getAnnoDraft()[fName];
-          const hasAnno = !!(conf && Object.keys(conf).length);
-          if (editThis || hasAnno) {
-            mCard.classList.add('has-anno');
-            mCard.classList.remove('has-image');
-            renderPdfWithAnno(src, fName, editThis);
-          } else {
-            mPdf.innerHTML = '<iframe src="' + encodeURI(src) + '" title="PDF 预览"></iframe>';
-            mCard.classList.add('has-pdf');
-            mCard.classList.remove('has-image');
-            mCard.classList.remove('has-anno');
-          }
+          mCard.classList.remove('has-pdf');
+          mCard.classList.remove('has-image');
+          mCard.classList.add('has-anno');
+          renderPdfWithAnno(src, fName, editThis);
         }
         mPdf.style.display = 'block';
       } else {

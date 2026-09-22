@@ -1832,7 +1832,7 @@
 </footer>
 
 <script src="jszip.min.js"></script>
-<script src="lib/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
 <script>
   // ＝= 作品数据 —— 从 API 拉取 ===
   function renderCard(w) {
@@ -2114,7 +2114,7 @@
         mPdf.innerHTML = '<iframe src="' + encodeURI(src) + '" title="PDF 预览"></iframe>';
         return;
       }
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'lib/pdf.worker.min.js';
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
       if (pdfjsTask) { try { pdfjsTask.destroy(); } catch (e) {} pdfjsTask = null; }
 
       mPdf.innerHTML =

@@ -1832,7 +1832,6 @@
 </footer>
 
 <script src="jszip.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
 <script>
   // ＝= 作品数据 —— 从 API 拉取 ===
   function renderCard(w) {
@@ -2337,15 +2336,11 @@
           mCard.classList.remove('has-anno');
           mCard.classList.add('has-image');
         } else {
-          // 所有 PDF 统一走 PDF.js 渲染（逐页 canvas，跨设备/浏览器稳定，避免 iframe 内嵌在手机/浏览器上乱码）
-          // 注解：仅当配置过注解、或 URL 带 ?anno=文件名（编辑模式）时叠加；否则就是纯预览
-          const fName = file.dataset.file || '';
-          const annoParam = new URLSearchParams(location.search).get('anno');
-          const editThis = !!(annoParam && annoParam === fName);
-          mCard.classList.remove('has-pdf');
+          // PDF 用浏览器原生 iframe 预览：不依赖额外组件、不白屏，且自带上下连续滚动
+          mPdf.innerHTML = '<iframe src="' + encodeURI(src) + '" title="PDF 预览"></iframe>';
+          mCard.classList.remove('has-anno');
           mCard.classList.remove('has-image');
-          mCard.classList.add('has-anno');
-          renderPdfWithAnno(src, fName, editThis);
+          mCard.classList.add('has-pdf');
         }
         mPdf.style.display = 'block';
       } else {

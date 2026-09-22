@@ -2134,7 +2134,20 @@
       }
 
       pdfjsTask = pdfjsLib.getDocument(encodeURI(src));
+      // 网络不稳时 PDF.js 可能一直卡在「加载中」：超时降级到 iframe，保证至少能看
+      var pdfDone = false;
+      function fallbackToIframe() {
+        if (pdfDone) return;
+        pdfDone = true;
+        try { pdfjsTask.destroy(); } catch (e) {}
+        mPdf.innerHTML = '<iframe src="' + encodeURI(src) + '" title="PDF 预览"></iframe>';
+        mCard.classList.remove('has-anno');
+        mCard.classList.add('has-pdf');
+      }
+      var fallbackTimer = setTimeout(fallbackToIframe, 12000);
       pdfjsTask.promise.then(function(pdf) {
+        pdfDone = true;
+        clearTimeout(fallbackTimer);
         let cur = 1;
         let renderTask = null; // 防止快速翻页时两个渲染任务抢同一 canvas
 
@@ -2228,8 +2241,8 @@
 
         renderPage(1);
       }).catch(function(err) {
-        info.textContent = '加载失败';
-        console.error('PDF.js 加载失败：', err);
+        console.error('PDF.js 加载失败，降级 iframe：', err);
+        fallbackToIframe();
       });
     }
 
